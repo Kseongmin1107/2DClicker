@@ -18,6 +18,7 @@ public class UpgradeManager : MonoBehaviour
     private float currentValue;
     private int nextLevelCost;
 
+    public AutoAttack autoAttack;
     private void Start()
     {
         currentLevel = 0;
@@ -70,8 +71,11 @@ public class UpgradeManager : MonoBehaviour
     //            GameManager.Instance.finalCriticalDamage = currentValue;
     //            break;
            //case StatType.AutoAttack:
-   //             AutoAttackController.Instance.UpdateAttackSpeed(currentValue);
-   //             break;
+           //     if (autoAttack != null)
+           //     {
+           //         autoAttack.UpdateAutoAttackSpeed(currentValue);
+           //     }
+           //     break
     //        case StatType.GoldBonus:
     //            GameManager.Instance.finalGoldBonus = currentValue;
     //            break;

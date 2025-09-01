@@ -1,31 +1,40 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AutoAttack : MonoBehaviour
 {
     public ClickAttack clickAttack;
-    public int autoLevel = 1;   // ÀÚµ¿°ø°İ ·¹º§
-    [SerializeField] private float interval = 1f; // ÀÚµ¿°ø°İ °£°İ
+
+Â  Â  private float autoAttackSpeed;
+    private Coroutine autoAttackCoroutine;
 
     private void Awake()
     {
         if (clickAttack == null)
             clickAttack = GetComponent<ClickAttack>();
     }
-
-    public void Start()
+    public void UpdateAutoAttackSpeed(float newSpeed)
     {
-        StartCoroutine(AutoAttackCoroutine());
+        autoAttackSpeed = newSpeed;
+
+        if (autoAttackCoroutine != null)
+        {
+            StopCoroutine(autoAttackCoroutine);
+        }
+        if (autoAttackSpeed > 0)
+        {
+            autoAttackCoroutine = StartCoroutine(AutoAttackCoroutineLoop());
+        }
     }
 
-    private IEnumerator AutoAttackCoroutine()
+    private IEnumerator AutoAttackCoroutineLoop()
     {
         while (true)
         {
-            clickAttack.Attack();
-            Debug.Log("ÀÚµ¿ °ø°İÁß");
-            yield return new WaitForSeconds(interval);
+Â  Â  Â  Â  Â  Â  clickAttack.Attack();
+            Debug.Log("ìë™ ê³µê²©ì¤‘");
+Â  Â  Â  Â  Â  Â  yield return new WaitForSeconds(1f / autoAttackSpeed);
         }
     }
 }
