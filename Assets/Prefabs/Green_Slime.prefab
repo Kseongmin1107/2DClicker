@@ -49,6 +49,7 @@ MonoBehaviour:
   Fullhealth: 100
   Nowhealth: 100
   Hitdamage: 5
+  animator: {fileID: 2094313351526340079}
 --- !u!1 &370648189516471882
 GameObject:
   m_ObjectHideFlags: 0
