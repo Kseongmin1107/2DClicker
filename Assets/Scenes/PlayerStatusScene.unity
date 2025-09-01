@@ -1119,6 +1119,7 @@ MonoBehaviour:
   levelText: {fileID: 342883197}
   valueText: {fileID: 423432557}
   costText: {fileID: 658027764}
+  autoAttack: {fileID: 0}
 --- !u!4 &460893137
 Transform:
   m_ObjectHideFlags: 0
@@ -1169,7 +1170,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -279, y: -155}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &509469886
 MonoBehaviour:
@@ -1988,6 +1989,7 @@ MonoBehaviour:
   levelText: {fileID: 728149764}
   valueText: {fileID: 333038989}
   costText: {fileID: 1542125117}
+  autoAttack: {fileID: 0}
 --- !u!4 &844533311
 Transform:
   m_ObjectHideFlags: 0
@@ -2191,8 +2193,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -279, y: -155}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -279, y: -138}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1179977033
 MonoBehaviour:
@@ -2714,8 +2716,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -279, y: -331}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -279, y: -306}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1582215087
 MonoBehaviour:
@@ -2789,6 +2791,7 @@ MonoBehaviour:
   levelText: {fileID: 687777827}
   valueText: {fileID: 531366141}
   costText: {fileID: 1846082235}
+  autoAttack: {fileID: 0}
 --- !u!4 &1724077263
 Transform:
   m_ObjectHideFlags: 0
