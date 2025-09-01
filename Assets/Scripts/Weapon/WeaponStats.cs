@@ -6,9 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponStatData", menuName = "GameData/WeaponStatData")]
 public class WeaponStats : ScriptableObject
 {
-    public EnforceLevel[] stats;    // 강화별 스탯
+    public EnhanceLevel[] stats;    // 강화별 스탯
 
-    public EnforceLevel GetEnforceLevel(int level)  // 강화레벨정보 가져오기
+    public EnhanceLevel GetEnhanceLevel(int level)  // 강화레벨정보 가져오기
     {
         if (level > 5) level = 5;
 
