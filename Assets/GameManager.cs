@@ -1,0 +1,48 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance { get; private set; }
+
+    [SerializeField] private PlayerData player = new PlayerData();
+
+    public event Action<double> OnGoldChanged;
+    public event Action<string> OnSpendFailed;
+
+   
+    private void Awake()
+    {
+        if( Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+
+    // 재화 관리
+    public void AddGold(float amount)
+    {
+        amount = Mathf.Max(0, amount);
+        player.gold += amount;
+        OnGoldChanged?.Invoke(player.gold);
+    }
+
+    public bool TrySpendGold(double cost)
+    {
+        if (player.gold < cost)
+        {
+            OnSpendFailed?.Invoke("Not Enough Gold");
+            return false;
+        }
+        player.gold -= cost;
+        OnGoldChanged?.Invoke(player.gold);
+        return true;
+    }
+}
