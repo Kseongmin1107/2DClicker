@@ -14,6 +14,6 @@ public class Weapon : MonoBehaviour
             level = 5;
         var stat = statData.GetEnforceLevel(level);
 
-        Debug.Log("강화완료");
+        Debug.Log($"공격력:{stat.attackPower}, 치명타:{stat.criticalRate}, 공격속도:{stat.attackSpeed}");
     }
 }
