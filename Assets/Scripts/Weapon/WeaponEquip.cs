@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class WeaponEquip : MonoBehaviour
 {
-    public List<GameObject> weaponPrefab;
-
     private GameObject currentWeapon;
 
     public void EquipWeapon(GameObject weaponPrefab)
     {
-        if (currentWeapon == weaponPrefab)
+        if (currentWeapon != null)
         {
-            Debug.Log("이미 장착된 무기");
+            Debug.Log("장착 해제 후 장착하세요.");
             return;
         }
-        // 장착한무기와 장착하려는 무기가 다를때
-        if (currentWeapon != null)
-            UnequipWeapon();
 
         currentWeapon = Instantiate(weaponPrefab);
         Debug.Log("무기 장착");
@@ -28,8 +23,8 @@ public class WeaponEquip : MonoBehaviour
         if (currentWeapon != null)
         {
             Destroy(currentWeapon);  // 장착한 무기 삭제
-            Debug.Log("장착 해제");
             currentWeapon = null;
+            Debug.Log("장착 해제");
         }
         else
         {
