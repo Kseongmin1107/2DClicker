@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MouseClick : MonoBehaviour
+public class ClickAttack : MonoBehaviour
 {
     void Update()
     {
@@ -17,7 +17,10 @@ public class MouseClick : MonoBehaviour
     private bool IsClicked()
     {
         if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("클릭되었음");
             return true;    // 좌클릭
+        }
         else
             return false;
     }
@@ -30,7 +33,7 @@ public class MouseClick : MonoBehaviour
         Attack();
     }
 
-    private void Attack()
+    public void Attack()
     {
         // 공격 애니메이션
         // 데미지 처리
