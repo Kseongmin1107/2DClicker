@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
     public WarningPopup warningPopup;
+    public CanvasGroup fadePanel;
+    public float fadeDuration = 1f;
 
     private void Awake()
     {
@@ -39,4 +42,41 @@ public class UIManager : MonoBehaviour
         popup.SetActive(true);
     }
 
+    public void FadeIn()
+    {
+        StartCoroutine(CoFade(1, 0));
+    }
+
+    public void FadeOut()
+    {
+        StartCoroutine(CoFade(0, 1));
+    }
+
+    public void LoadScene(string SceneName)
+    {
+        StartCoroutine(FadeAndLoadScene(SceneName));
+    }
+
+    private IEnumerator CoFade(float from, float to)
+    {
+        float t = 0;
+        fadePanel.blocksRaycasts = true;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            fadePanel.alpha = Mathf.Lerp(from, to, t / fadeDuration);
+            yield return null;
+        }
+        fadePanel.alpha = to;
+        fadePanel.blocksRaycasts = (to != 0);
+    }
+
+    private IEnumerator FadeAndLoadScene(string sceneName)
+    {
+        yield return CoFade(0, 1);
+
+        SceneManager.LoadScene(sceneName);
+
+        yield return CoFade(1, 0);
+    }
 }
