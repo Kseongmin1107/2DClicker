@@ -89,11 +89,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statData: {fileID: 11400000, guid: feb9e4fd1b47cea4793d2d589cbc842a, type: 2}
-  gold: 1000
   enhanceLevelTxt:
-  - {fileID: 3771446302793678502, guid: d5ff48d7b5136894390dc23f8d965b95, type: 3}
-  - {fileID: 7178068882831415307, guid: 109565038bd08034da8e00c4e60b743b, type: 3}
-  - {fileID: 4543251712107646722, guid: ad12a90b9862f49459cb4899b11598f9, type: 3}
-  - {fileID: 7094183152664769896, guid: 0c0f6e8b21d081c4ebc098bb4678f723, type: 3}
-  - {fileID: 4368825959199069058, guid: db2a1e4518680734cba4ccb8561cc79b, type: 3}
-  - {fileID: 7927192878023123816, guid: 9b3ef3513b5b8a1489f92a8044fd33b9, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  attackText: {fileID: 0}
+  criticalText: {fileID: 0}
+  attackSpeedText: {fileID: 0}
+  level: 0

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private WeaponStats statData;
+    [SerializeField] public WeaponStats statData;
     //[SerializeField] private int gold = 1000;
 
     [SerializeField] private GameObject[] enhanceLevelTxt;
@@ -14,13 +14,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Text criticalText;
     [SerializeField] private Text attackSpeedText;
 
-    private int level = 0;
+    public int level = 0;
     private EnhanceLevel currentStat;
 
     private void Start()
     {
         level = 0;
-        currentStat = statData.GetEnhanceLevel(level);  // 스탯 맨처음으로 초기화
+        UpdateEnhanceText();
         UpdateEnhanceLevelTxt();
     }
 
@@ -29,8 +29,7 @@ public class Weapon : MonoBehaviour
         if (level < 5)
         {
             level++;
-            currentStat = statData.GetEnhanceLevel(level);
-
+            UpdateEnhanceText();
             UpdateEnhanceLevelTxt();
 
             Debug.Log($"+{level}강");
@@ -58,14 +57,17 @@ public class Weapon : MonoBehaviour
     //    return nextLevel * 200;     // 강화비용 갈수록 증가
     //}
 
-    private void UpdateEnhanceLevelTxt()
+    public void UpdateEnhanceLevelTxt()
     {
         for (int i = 0; i < enhanceLevelTxt.Length; i++)
         {
             if (enhanceLevelTxt[i] != null)
                 enhanceLevelTxt[i].SetActive(i == level);   // 강화레벨텍스트 각레벨마다 뜨게
         }
+    }
 
+    public void UpdateEnhanceText()
+    {
         // 텍스트 능력치 갱신
         currentStat = statData.GetEnhanceLevel(level);
         if (attackText != null)

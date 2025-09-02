@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     public List<GameObject> weaponPrefabs;
+    public List<WeaponStats> weaponStats;
 
     public Transform inventorySlot;     // 슬롯에 무기프리팹이 나타나게 위치설정
     public Transform enhanceSlot;
@@ -35,7 +36,17 @@ public class WeaponManager : MonoBehaviour
             currentWeapon.transform.localPosition = Vector3.zero;
             currentWeapon.transform.localScale = Vector3.one;
 
-            GameObject copy = Instantiate(weaponPrefabs[index], inventorySlot); // 강화무기를 따라서 인벤토리에도 바뀌게 생성
+            Weapon weaponScript = currentWeapon.GetComponent<Weapon>();
+            //if (weaponScript != null)
+            //{
+            //    weaponScript.statData = weaponStats[index];
+            //    weaponScript.level = 0;
+            //    weaponScript.UpdateEnhanceLevelTxt();
+            //    weaponScript.UpdateEnhanceText();
+            //}
+
+
+            GameObject copy = Instantiate(weaponPrefabs[index], inventorySlot); // 강화무기슬롯을 따라서 인벤토리에도 바뀌게 생성
             copy.transform.localPosition = Vector3.zero;
             copy.transform.localScale = Vector3.one;
 
