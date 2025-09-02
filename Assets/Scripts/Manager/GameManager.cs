@@ -11,9 +11,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerData player = new PlayerData();
 
     public event Action<double> OnGoldChanged;
-    public event Action<string> OnSpendFailed;
+    public event Action<GameObject> OnSpendFailed;
 
-   
+    public GameObject GoldWarningPopup;
+
+    public PlayerData Player
+    {
+        get { return player; }
+    }
+
+
     private void Awake()
     {
         if( Instance != null && Instance != this)
@@ -38,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.gold < cost)
         {
-            OnSpendFailed?.Invoke("Not Enough Gold");
+            OnSpendFailed?.Invoke(GoldWarningPopup);
             return false;
         }
         player.gold -= cost;
