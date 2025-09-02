@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] public WeaponStats statData;
+    public WeaponStats statData;
     //[SerializeField] private int gold = 1000;
 
-    [SerializeField] private GameObject[] enhanceLevelTxt;
+    [SerializeField] private Text levelText;
+    [SerializeField] private Image levelImage;  // 이미지
+    [SerializeField] private Sprite[] levelSprites;
 
     [SerializeField] private Text attackText;   // 스탯 연결
     [SerializeField] private Text criticalText;
@@ -17,20 +19,21 @@ public class Weapon : MonoBehaviour
     public int level = 0;
     private EnhanceLevel currentStat;
 
-    private void Start()
+    private void StartData(WeaponStats data)        // 스타트말고 메서드 사용해서 원할때 쓸수 있게
     {
+        statData = data;
         level = 0;
-        UpdateEnhanceText();
-        UpdateEnhanceLevelTxt();
+        UpdateEnhanceUI();
     }
 
     public void Enhance()
     {
-        if (level < 5)
+        int localLevel = level % 6;     // 0~ 5강 = 6개 반복되게 하기
+
+        if (localLevel < 5)
         {
             level++;
-            UpdateEnhanceText();
-            UpdateEnhanceLevelTxt();
+            UpdateEnhanceUI();
 
             Debug.Log($"+{level}강");
             Debug.Log($"공격력:{currentStat.attackPower}, 치명타:{currentStat.criticalRate}, 공격속도:{currentStat.attackSpeed}");
@@ -57,24 +60,27 @@ public class Weapon : MonoBehaviour
     //    return nextLevel * 200;     // 강화비용 갈수록 증가
     //}
 
-    public void UpdateEnhanceLevelTxt()
+    public void UpdateEnhanceUI()
     {
-        for (int i = 0; i < enhanceLevelTxt.Length; i++)
-        {
-            if (enhanceLevelTxt[i] != null)
-                enhanceLevelTxt[i].SetActive(i == level);   // 강화레벨텍스트 각레벨마다 뜨게
-        }
-    }
+        int localLevel = level % 6;
 
-    public void UpdateEnhanceText()
-    {
-        // 텍스트 능력치 갱신
-        currentStat = statData.GetEnhanceLevel(level);
+        if (levelText != null)
+            levelText.text = "+" + localLevel;  // +0 ~ +5
+        
+        if (levelImage != null && levelSprites != null && levelSprites.Length > localLevel)
+            levelImage.sprite = levelSprites[localLevel];       // 이미지(스프라이트)
+
+        if (statData != null)
+            currentStat = statData.GetEnhanceLevel(localLevel);     // 현재 스탯 가져오기
+        else
+            currentStat = new EnhanceLevel();
+
         if (attackText != null)
-            attackText.text = "공격력: " + currentStat.attackPower;
+            attackText.text = "공격력 : " + currentStat.attackPower.ToString();
         if (criticalText != null)
-            criticalText.text = "치명타: " + currentStat.criticalRate;
+            criticalText.text = "치명타 : " + currentStat.criticalRate.ToString("F2");      // 소수점으로 바꾸자
         if (attackSpeedText != null)
-            attackSpeedText.text = "공속: " + currentStat.attackSpeed;
+            attackSpeedText.text = "공격속도 : " + currentStat.attackSpeed.ToString("F2");
+
     }
 }

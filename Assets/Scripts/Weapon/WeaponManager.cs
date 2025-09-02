@@ -37,22 +37,10 @@ public class WeaponManager : MonoBehaviour
             currentWeapon.transform.localScale = Vector3.one;
 
             Weapon weaponScript = currentWeapon.GetComponent<Weapon>();
-            //if (weaponScript != null)
-            //{
-            //    weaponScript.statData = weaponStats[index];
-            //    weaponScript.level = 0;
-            //    weaponScript.UpdateEnhanceLevelTxt();
-            //    weaponScript.UpdateEnhanceText();
-            //}
-
 
             GameObject copy = Instantiate(weaponPrefabs[index], inventorySlot); // 강화무기슬롯을 따라서 인벤토리에도 바뀌게 생성
             copy.transform.localPosition = Vector3.zero;
             copy.transform.localScale = Vector3.one;
-
-            //Weapon weapon = copy.GetComponent<Weapon>();    // 인벤토리에는 스크립트 필요없음
-            //if (weapon != null)
-            //    weapon.enabled = false;
 
             currentWeaponIndex = index;
         }
