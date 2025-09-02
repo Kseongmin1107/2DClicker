@@ -35,7 +35,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance != null)
+        if (GameManager.Instance != null) //게임이 시작될 때 플레이어의 이전 상황 업그레이드 불러오기
         {
             switch (statType)
             {
