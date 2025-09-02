@@ -29,7 +29,6 @@ public class SpawnSlime : MonoBehaviour
         // samePrefab/nextPrefab은 반드시 Project 창의 프리팹 자산이어야 함.
     }
 
-    /// <summary>Death 애니 끝에서 DestroyOnDeath가 호출.</summary>
     public void HandleDeathAndRespawn(Transform deadRoot) // 생성, 파괴를 on/off를 통해서구현
     {
         deathCount++;
