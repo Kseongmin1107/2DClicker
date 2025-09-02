@@ -568,6 +568,8 @@ GameObject:
   - component: {fileID: 344991935}
   - component: {fileID: 344991937}
   - component: {fileID: 344991936}
+  - component: {fileID: 344991939}
+  - component: {fileID: 344991938}
   m_Layer: 5
   m_Name: GoldWarning
   m_TagString: Untagged
@@ -633,6 +635,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344991934}
   m_CullTransparentMesh: 1
+--- !u!225 &344991938
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344991934}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &344991939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344991934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06c4398baecd3d45bfbb275e0e52a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 344991938}
+  gameObject: {fileID: 344991934}
+  showDuration: 1.2
+  fadeDuration: 0.25
 --- !u!1 &640353575
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,7 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf4bbaf2ef398f43829b692525b544a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warningPopup: {fileID: 0}
+  warningPopup: {fileID: 344991939}
 --- !u!4 &837284139
 Transform:
   m_ObjectHideFlags: 0

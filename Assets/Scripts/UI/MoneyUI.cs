@@ -7,7 +7,7 @@ public class MoneyUI : MonoBehaviour
 {
     public TMP_Text haveGold;
 
-    private void OnEnable()
+    private void Start()
     {
         var gold = Player.Instance.Gold;
         if (gold != null)
