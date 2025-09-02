@@ -18,11 +18,13 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Color affordableColor = Color.black;
     [SerializeField] private Color insufficientColor = Color.red;
 
+    public AutoAttack autoAttack;
+
     private int currentLevel;
     private float currentValue;
     private int nextLevelCost;
     private Coroutine autoUpgradeCoroutine;
-    public AutoAttack autoAttack;
+
 
     private void Awake()
     {
