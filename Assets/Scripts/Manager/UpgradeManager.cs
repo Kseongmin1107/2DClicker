@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class UpgradeManager : MonoBehaviour
     private float currentValue;
     private int nextLevelCost;
 
+    private Coroutine autoUpgradeCoroutine;
+
+
     public AutoAttack autoAttack;
     private void Start()
     {
@@ -25,12 +29,47 @@ public class UpgradeManager : MonoBehaviour
         UpdateUpgradeUI();
        // UpdateFinalStat();
     }
+    public void StartAutoUpgrade()
+    {
+        if (autoUpgradeCoroutine == null)
+        {
+            autoUpgradeCoroutine = StartCoroutine(AutoUpgradeLoop());
+        }
+    }
+
+    public void StopAutoUpgrade()
+    {
+        if (autoUpgradeCoroutine != null)
+        {
+            StopCoroutine(autoUpgradeCoroutine);
+            autoUpgradeCoroutine = null;
+        }
+    }
+    private IEnumerator AutoUpgradeLoop()
+    {
+        UpgradeAndCheckCost();
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.2f);
+            UpgradeAndCheckCost();
+        }
+    }
+    private void UpgradeAndCheckCost()
+    {
+        // 골드나 비용이 충분한지 확인하는 로직 추가
+        // if (GameManager.Instance.gold >= nextLevelCost)
+        // {
+        //     GameManager.Instance.SpendGold(nextLevelCost); // 골드 소모
+        currentLevel++;
+        UpdateUpgradeUI();
+        //     UpdateFinalStat();
+        // }
+    }
 
     public void OnClickUpgradeButton()
     {
-        currentLevel++;
-        UpdateUpgradeUI();
-       // UpdateFinalStat();
+        UpgradeAndCheckCost();
     }
 
     public void UpdateUpgradeUI()
