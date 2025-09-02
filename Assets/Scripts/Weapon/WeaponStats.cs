@@ -6,9 +6,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponStatData", menuName = "GameData/WeaponStatData")]
 public class WeaponStats : ScriptableObject
 {
-    public string weaponName;
-    public GameObject weaponPrefab;
+    public string[] weaponName;
     public EnhanceLevel[] stats;    // 강화별 스탯
+
+    public string GetWeaponName(int level)
+    {
+        int nameIndex = level / 6;  // 0~5강 이름1, 그다음 이름2
+        if (nameIndex >= weaponName.Length)
+            nameIndex = weaponName.Length - 1;
+        return weaponName[nameIndex];
+    }
 
     public EnhanceLevel GetEnhanceLevel(int level)  // 강화레벨정보 가져오기
     {

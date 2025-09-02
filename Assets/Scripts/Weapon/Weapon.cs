@@ -8,9 +8,10 @@ public class Weapon : MonoBehaviour
     public WeaponStats statData;
     //[SerializeField] private int gold = 1000;
 
+    [SerializeField] private Text weaponNameText;
     [SerializeField] private Text levelText;
-    [SerializeField] private Image levelImage;  // 이미지
-    [SerializeField] private Sprite[] levelSprites;
+    public Image weaponImage;
+    [SerializeField] private Sprite[] weaponSprites;
 
     [SerializeField] private Text attackText;   // 스탯 연결
     [SerializeField] private Text criticalText;
@@ -19,30 +20,24 @@ public class Weapon : MonoBehaviour
     public int level = 0;
     private EnhanceLevel currentStat;
 
-    private void StartData(WeaponStats data)        // 스타트말고 메서드 사용해서 원할때 쓸수 있게
+    private void Start()
     {
-        statData = data;
         level = 0;
         UpdateEnhanceUI();
     }
 
     public void Enhance()
     {
-        int localLevel = level % 6;     // 0~ 5강 = 6개 반복되게 하기
-
-        if (localLevel < 5)
-        {
             level++;
             UpdateEnhanceUI();
 
             Debug.Log($"+{level}강");
             Debug.Log($"공격력:{currentStat.attackPower}, 치명타:{currentStat.criticalRate}, 공격속도:{currentStat.attackSpeed}");
-        }
-        else
-        {
-            WeaponManager.Instance.EquipNextWeapon();
-            Destroy(gameObject);
-        }
+        //
+        //
+        //    WeaponManager.Instance.EquipNextWeapon();
+        //    Destroy(gameObject);
+        //
         //int cost = GetEnhanceCost(level + 1);
         //if (gold < cost)
         //{
@@ -66,14 +61,18 @@ public class Weapon : MonoBehaviour
 
         if (levelText != null)
             levelText.text = "+" + localLevel;  // +0 ~ +5
-        
-        if (levelImage != null && levelSprites != null && levelSprites.Length > localLevel)
-            levelImage.sprite = levelSprites[localLevel];       // 이미지(스프라이트)
+
+        if (weaponNameText != null && statData != null)
+            weaponNameText.text = statData.GetWeaponName(level);    // 무기 이름
+
+        if (weaponImage != null && weaponSprites != null && weaponSprites.Length > localLevel)
+            weaponImage.sprite = weaponSprites[localLevel];       // 무기 이미지(스프라이트)
 
         if (statData != null)
-            currentStat = statData.GetEnhanceLevel(localLevel);     // 현재 스탯 가져오기
+            currentStat = statData.GetEnhanceLevel(level);     // 현재 스탯 가져오기
         else
             currentStat = new EnhanceLevel();
+
 
         if (attackText != null)
             attackText.text = "공격력 : " + currentStat.attackPower.ToString();
