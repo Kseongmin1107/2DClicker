@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DestroyOnDeath : StateMachineBehaviour
 {
-    [SerializeField] private bool destroyIfNoSpawner = true;
+
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -16,9 +16,6 @@ public class DestroyOnDeath : StateMachineBehaviour
             // ★ 루트를 넘겨서 스포너가 정확히 부모 오브젝트를 파괴하도록
             spawner.HandleDeathAndRespawn(root);
         }
-        else if (destroyIfNoSpawner)
-        {
-            Object.Destroy(root.gameObject);  // ★ 루트를 파괴
-        }
+
     }
 }
