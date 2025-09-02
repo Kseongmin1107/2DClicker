@@ -19,6 +19,7 @@ public class PlayerData
     public int critChanceUpgradeLevel;
     public int critDamageUpgradeLevel;
     public int goldBonusUpgradeLevel;
+    public int autoAttackSpeedUpgradeLevel;
 
     public string equippedWeaponId = "";
 

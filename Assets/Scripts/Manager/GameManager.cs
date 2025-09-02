@@ -13,7 +13,12 @@ public class GameManager : MonoBehaviour
     public event Action<double> OnGoldChanged;
     public event Action<string> OnSpendFailed;
 
-   
+    public PlayerData Player
+    {
+        get { return player; }
+    }
+
+
     private void Awake()
     {
         if( Instance != null && Instance != this)

@@ -25,7 +25,6 @@ public class UpgradeManager : MonoBehaviour
     private int nextLevelCost;
     private Coroutine autoUpgradeCoroutine;
 
-
     private void Awake()
     {
         if (autoAttack == null)
@@ -33,12 +32,27 @@ public class UpgradeManager : MonoBehaviour
             autoAttack = FindObjectOfType<AutoAttack>();
         }
     }
+
     private void Start()
     {
-        currentLevel = 0;
+        if (GameManager.Instance != null)
+        {
+            switch (statType)
+            {
+                case StatType.CriticalDamage:
+                    currentLevel = GameManager.Instance.Player.critDamageUpgradeLevel;
+                    break;
+                case StatType.AutoAttack:
+                    currentLevel = GameManager.Instance.Player.atkUpgradLevel;
+                    break;
+                case StatType.GoldBonus:
+                    currentLevel = GameManager.Instance.Player.goldBonusUpgradeLevel;
+                    break;
+            }
+        }
         UpdateUpgradeUI();
-       // UpdateFinalStat();
     }
+
     public void StartAutoUpgrade()
     {
         if (autoUpgradeCoroutine == null)
@@ -55,26 +69,31 @@ public class UpgradeManager : MonoBehaviour
             autoUpgradeCoroutine = null;
         }
     }
+
     private IEnumerator AutoUpgradeLoop()
     {
         UpgradeAndCheckCost();
-
         while (true)
         {
             yield return new WaitForSeconds(0.2f);
             UpgradeAndCheckCost();
         }
     }
+
     private void UpgradeAndCheckCost()
     {
-        // 골드나 비용이 충분한지 확인하는 로직 추가
-        // if (GameManager.Instance.gold >= nextLevelCost)
-        // {
-        //     GameManager.Instance.SpendGold(nextLevelCost); // 골드 소모
-        currentLevel++;
-        UpdateUpgradeUI();
-        //     UpdateFinalStat();
-        // }
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager.Instance is not found!");
+            return;
+        }
+
+        if (GameManager.Instance.TrySpendGold(nextLevelCost))
+        {
+            currentLevel++;
+            UpdateUpgradeUI();
+            UpdateFinalStat();
+        }
     }
 
     public void OnClickUpgradeButton()
@@ -84,14 +103,10 @@ public class UpgradeManager : MonoBehaviour
 
     public void UpdateUpgradeUI()
     {
-        // 현재 레벨에 따른 능력치 값 계산
         currentValue = upgradeData.baseValue + (currentLevel * upgradeData.valueIncreasePerLevel);
-
-        // 다음 레벨업에 필요한 비용 계산
         nextLevelCost = upgradeData.baseCost + (currentLevel * (int)upgradeData.costIncreasePerLevel);
 
-        // UI 텍스트 갱신
-        levelText.text = upgradeData.upgradeName +" " + currentLevel.ToString();
+        levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
         switch (statType)
         {
             case StatType.CriticalDamage:
@@ -104,39 +119,55 @@ public class UpgradeManager : MonoBehaviour
         }
 
         costText.text = nextLevelCost.ToString();
-        //완성후 주석해제
-        //if (GameManager.Instance != null && GameManager.Instance.gold >= nextLevelCost)
-        //{
-        //    costText.color = affordableColor; // 충분하면 검은색
-        //}
-        //else
-        //{
-        //    costText.color = insufficientColor; // 부족하면 빨간색
-        //}
-    }
-    //게임매니저 스크립트 생성후 주석 해제
-        //private void UpdateFinalStat()
-    //{
-    //    if (GameManager.Instance == null)
-    //    {
-    //        Debug.LogError("GameManager.Instance is not found!");
-    //        return;
-    //    }
 
-    //    switch (statType)
-    //    {
-    //        case StatType.CriticalDamage:
-    //            GameManager.Instance.finalCriticalDamage = currentValue;
-    //            break;
-           //case StatType.AutoAttack:
-           //     if (autoAttack != null)
-           //     {
-           //         autoAttack.UpdateAutoAttackSpeed(currentValue);
-           //     }
-           //     break
-    //        case StatType.GoldBonus:
-    //            GameManager.Instance.finalGoldBonus = currentValue;
-    //            break;
-    //    }
-    //}
+        if (GameManager.Instance != null && GameManager.Instance.Player.gold >= nextLevelCost)
+        {
+            costText.color = affordableColor;
+        }
+        else
+        {
+            costText.color = insufficientColor;
+        }
+
+        // PlayerData에 현재 업그레이드 레벨 저장
+        if (GameManager.Instance != null)
+        {
+            switch (statType)
+            {
+                case StatType.CriticalDamage:
+                    GameManager.Instance.Player.critDamageUpgradeLevel = currentLevel;
+                    break;
+                case StatType.AutoAttack:
+                    GameManager.Instance.Player.autoAttackSpeedUpgradeLevel = currentLevel;
+                    break;
+                case StatType.GoldBonus:
+                    GameManager.Instance.Player.goldBonusUpgradeLevel = currentLevel;
+                    break;
+            }
+        }
+    }
+
+    private void UpdateFinalStat()
+    {
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager.Instance is not found!");
+            return;
+        }
+        switch (statType)
+        {
+            case StatType.CriticalDamage:
+                GameManager.Instance.Player.baseCritDamage = currentValue;
+                break;
+            case StatType.AutoAttack:
+                if (autoAttack != null)
+                {
+                    autoAttack.UpdateAutoAttackSpeed(currentValue);
+                }
+                break;
+            case StatType.GoldBonus:
+                GameManager.Instance.Player.baseGoldBonus = currentValue;
+                break;
+        }
+    }
 }
