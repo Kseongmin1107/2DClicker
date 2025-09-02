@@ -6,7 +6,7 @@ public class WeaponEquip : MonoBehaviour
 {
     private GameObject currentWeapon;
 
-    public void EquipWeapon(GameObject weaponPrefab)
+    public void EquipWeapon(GameObject weaponObject)
     {
         if (currentWeapon != null)
         {
@@ -14,7 +14,7 @@ public class WeaponEquip : MonoBehaviour
             return;
         }
 
-        currentWeapon = Instantiate(weaponPrefab);
+        currentWeapon = weaponObject;
         Debug.Log("¹«±â ÀåÂø");
     }
 
