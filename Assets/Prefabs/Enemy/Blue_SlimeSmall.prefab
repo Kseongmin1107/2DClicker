@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8604999861510558403}
   - component: {fileID: 5670263267322973480}
+  - component: {fileID: 3108839029533322897}
   m_Layer: 0
   m_Name: Blue_SlimeSmall
   m_TagString: Enemy
@@ -51,6 +52,23 @@ MonoBehaviour:
   Hitdamage: 5
   score: 3
   animator: {fileID: 2385656694049239641}
+--- !u!114 &3108839029533322897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884104235968697580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bd098d8a40e8b42a0ef98d2c98a47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  samePrefab: {fileID: 884104235968697580}
+  nextPrefab: {fileID: 41779319725098816, guid: cc6d6fe75f027d4488a5940329acadb3, type: 3}
+  killsToChange: 3
+  respawnAtOriginalPos: 1
+  respawnDelay: 1
 --- !u!1 &1245176170908015651
 GameObject:
   m_ObjectHideFlags: 0

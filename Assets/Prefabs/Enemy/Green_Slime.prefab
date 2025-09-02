@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451255255938198696}
   - component: {fileID: 3114047050648796485}
+  - component: {fileID: 5814142071152756769}
   m_Layer: 0
   m_Name: Green_Slime
   m_TagString: Enemy
@@ -51,6 +52,25 @@ MonoBehaviour:
   Hitdamage: 5
   score: 3
   animator: {fileID: 2094313351526340079}
+--- !u!114 &5814142071152756769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41779319725098816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bd098d8a40e8b42a0ef98d2c98a47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  samePrefab: {fileID: 41779319725098816}
+  nextPrefab: {fileID: 6594632934112525283, guid: 58f9c9da0a7cc0f4ea33179e5103dbff, type: 3}
+  killsToChange: 3
+  respawnAtOriginalPos: 1
+  respawnDelay: 0
+  overrideParent: {fileID: 0}
+  chainId: SlimeLine1
 --- !u!1 &2662617462821980069
 GameObject:
   m_ObjectHideFlags: 0
