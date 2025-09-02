@@ -15,7 +15,12 @@ public class GameManager : MonoBehaviour
 
     public GameObject GoldWarningPopup;
 
-   
+    public PlayerData Player
+    {
+        get { return player; }
+    }
+
+
     private void Awake()
     {
         if( Instance != null && Instance != this)
