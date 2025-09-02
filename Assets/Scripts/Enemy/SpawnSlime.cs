@@ -30,7 +30,7 @@ public class SpawnSlime : MonoBehaviour
     }
 
     /// <summary>Death 애니 끝에서 DestroyOnDeath가 호출.</summary>
-    public void HandleDeathAndRespawn(Transform deadRoot)
+    public void HandleDeathAndRespawn(Transform deadRoot) // 생성, 파괴를 on/off를 통해서구현
     {
         deathCount++;
 
