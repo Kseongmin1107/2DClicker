@@ -6,10 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance { get; private set; }
+    
+    public static UIManager Instance
+    {
+        get; private set;
+    }
     public WarningPopup warningPopup;
     public CanvasGroup fadePanel;
-    public float fadeDuration = 1f;
+    public float fadeDuration = 0.8f;
 
     private void Awake()
     {
@@ -18,8 +22,12 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        
     }
 
     private void OnEnable()
