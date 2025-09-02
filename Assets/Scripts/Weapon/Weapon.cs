@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -9,22 +10,37 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private GameObject[] enhanceLevelTxt;
 
-    private int level;
+    [SerializeField] private Text attackText;   // 스탯 연결
+    [SerializeField] private Text criticalText;
+    [SerializeField] private Text attackSpeedText;
+
+    private int level = 0;
     private EnhanceLevel currentStat;
 
     private void Start()
     {
+        level = 0;
+        currentStat = statData.GetEnhanceLevel(level);  // 스탯 맨처음으로 초기화
         UpdateEnhanceLevelTxt();
     }
 
     public void Enhance()
     {
-        if (level >= 5)
+        if (level < 5)
         {
-            Debug.Log("더이상 강화할 수 없습니다.");
-            return;
-        }
+            level++;
+            currentStat = statData.GetEnhanceLevel(level);
 
+            UpdateEnhanceLevelTxt();
+
+            Debug.Log($"+{level}강");
+            Debug.Log($"공격력:{currentStat.attackPower}, 치명타:{currentStat.criticalRate}, 공격속도:{currentStat.attackSpeed}");
+        }
+        else
+        {
+            WeaponManager.Instance.EquipNextWeapon();
+            Destroy(gameObject);
+        }
         //int cost = GetEnhanceCost(level + 1);
         //if (gold < cost)
         //{
@@ -34,13 +50,7 @@ public class Weapon : MonoBehaviour
         
         //gold -= cost;
 
-        level++;
-        currentStat = statData.GetEnhanceLevel(level);
 
-        UpdateEnhanceLevelTxt();
-
-        Debug.Log($"+{level}강");
-        Debug.Log($"공격력:{currentStat.attackPower}, 치명타:{currentStat.criticalRate}, 공격속도:{currentStat.attackSpeed}");
     }
 
     //private int GetEnhanceCost(int nextLevel)
@@ -55,5 +65,14 @@ public class Weapon : MonoBehaviour
             if (enhanceLevelTxt[i] != null)
                 enhanceLevelTxt[i].SetActive(i == level);   // 강화레벨텍스트 각레벨마다 뜨게
         }
+
+        // 텍스트 능력치 갱신
+        currentStat = statData.GetEnhanceLevel(level);
+        if (attackText != null)
+            attackText.text = "공격력: " + currentStat.attackPower;
+        if (criticalText != null)
+            criticalText.text = "치명타: " + currentStat.criticalRate;
+        if (attackSpeedText != null)
+            attackSpeedText.text = "공속: " + currentStat.attackSpeed;
     }
 }
