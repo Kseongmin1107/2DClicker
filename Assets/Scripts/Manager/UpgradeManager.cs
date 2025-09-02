@@ -15,14 +15,22 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI valueText;
     [SerializeField] private TextMeshProUGUI costText;
 
+    [SerializeField] private Color affordableColor = Color.black;
+    [SerializeField] private Color insufficientColor = Color.red;
+
     private int currentLevel;
     private float currentValue;
     private int nextLevelCost;
-
     private Coroutine autoUpgradeCoroutine;
-
-
     public AutoAttack autoAttack;
+
+    private void Awake()
+    {
+        if (autoAttack == null)
+        {
+            autoAttack = FindObjectOfType<AutoAttack>();
+        }
+    }
     private void Start()
     {
         currentLevel = 0;
@@ -94,6 +102,15 @@ public class UpgradeManager : MonoBehaviour
         }
 
         costText.text = nextLevelCost.ToString();
+        //완성후 주석해제
+        //if (GameManager.Instance != null && GameManager.Instance.gold >= nextLevelCost)
+        //{
+        //    costText.color = affordableColor; // 충분하면 검은색
+        //}
+        //else
+        //{
+        //    costText.color = insufficientColor; // 부족하면 빨간색
+        //}
     }
     //게임매니저 스크립트 생성후 주석 해제
         //private void UpdateFinalStat()
