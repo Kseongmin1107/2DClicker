@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponStatData", menuName = "GameData/WeaponStatData")]
 public class WeaponStats : ScriptableObject
 {
+    public string weaponName;
+    public GameObject weaponPrefab;
     public EnhanceLevel[] stats;    // 강화별 스탯
 
     public EnhanceLevel GetEnhanceLevel(int level)  // 강화레벨정보 가져오기
