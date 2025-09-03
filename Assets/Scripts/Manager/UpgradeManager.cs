@@ -35,7 +35,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance != null)
+        if (GameManager.Instance != null) //게임이 시작될 때 플레이어의 이전 상황 업그레이드 불러오기
         {
             switch (statType)
             {
@@ -50,6 +50,7 @@ public class UpgradeManager : MonoBehaviour
                     break;
             }
         }
+        UpdateUpgradeData();
         UpdateUpgradeUI();
     }
 
@@ -84,15 +85,20 @@ public class UpgradeManager : MonoBehaviour
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager.Instance is not found!");
+            Debug.LogError("게임매니저 인스턴스를 찾을 수 없습니다!");
             return;
         }
 
         if (GameManager.Instance.TrySpendGold(nextLevelCost))
         {
             currentLevel++;
+            UpdateUpgradeData();
             UpdateUpgradeUI();
             UpdateFinalStat();
+        }
+        else
+        {
+            StopAutoUpgrade();
         }
     }
 
@@ -101,35 +107,11 @@ public class UpgradeManager : MonoBehaviour
         UpgradeAndCheckCost();
     }
 
-    public void UpdateUpgradeUI()
+    private void UpdateUpgradeData()
     {
         currentValue = upgradeData.baseValue + (currentLevel * upgradeData.valueIncreasePerLevel);
         nextLevelCost = upgradeData.baseCost + (currentLevel * (int)upgradeData.costIncreasePerLevel);
 
-        levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
-        switch (statType)
-        {
-            case StatType.CriticalDamage:
-            case StatType.GoldBonus:
-                valueText.text = "+" + currentValue.ToString("F1") + "%";
-                break;
-            case StatType.AutoAttack:
-                valueText.text = currentValue.ToString("F1") + "회/초";
-                break;
-        }
-
-        costText.text = nextLevelCost.ToString();
-
-        if (GameManager.Instance != null && GameManager.Instance.Player.gold >= nextLevelCost)
-        {
-            costText.color = affordableColor;
-        }
-        else
-        {
-            costText.color = insufficientColor;
-        }
-
-        // PlayerData에 현재 업그레이드 레벨 저장
         if (GameManager.Instance != null)
         {
             switch (statType)
@@ -146,12 +128,40 @@ public class UpgradeManager : MonoBehaviour
             }
         }
     }
+    public void UpdateUpgradeUI()
+    {
+        if (GameManager.Instance != null && GameManager.Instance.Player != null)
+    {
+        Debug.Log("현재 골드: " + GameManager.Instance.Player.gold + " | 다음 레벨 비용: " + nextLevelCost);
+    }
+        levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
+        switch (statType)
+        {
+            case StatType.CriticalDamage:
+            case StatType.GoldBonus:
+                valueText.text = "+" + currentValue.ToString("F1") + "%";
+                break;
+            case StatType.AutoAttack:
+                valueText.text = currentValue.ToString("F1") + "회/초";
+                break;
+        }
+        costText.text = nextLevelCost.ToString();
+
+        if (GameManager.Instance != null && GameManager.Instance.Player.gold >= nextLevelCost)
+        {
+            costText.color = affordableColor;
+        }
+        else
+        {
+            costText.color = insufficientColor;
+        }
+    }
 
     private void UpdateFinalStat()
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager.Instance is not found!");
+            Debug.LogError("게임매니저 인스턴스를 찾을 수 없습니다!");
             return;
         }
         switch (statType)
