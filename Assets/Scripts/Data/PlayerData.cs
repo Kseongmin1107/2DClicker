@@ -9,13 +9,9 @@ public class PlayerData
     public int currentStage = 1;
     public double gold = 0;
 
-    public double baseAttack;
-    public float baseCritChance;
-    public float baseCritDamage;
-    public float baseGoldBonus;
+    public double Attack;
+    public float CritChance;
 
-    public int atkUpgradLevel;
-    public int critChanceUpgradeLevel;
     public int critDamageUpgradeLevel;
     public int goldBonusUpgradeLevel;
     public int autoAttackSpeedUpgradeLevel;
