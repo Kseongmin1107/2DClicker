@@ -360,7 +360,7 @@ PrefabInstance:
     - target: {fileID: 2451066894026345397, guid: 65444ff005ac610449492260850a0cbc, type: 3}
       propertyPath: attackEffectPrefab
       value: 
-      objectReference: {fileID: 3695496201365491471, guid: 82e970d3b3936594ab88510c480c307b, type: 3}
+      objectReference: {fileID: 4250298743439401460, guid: 184c47b8b8e4c814d8241a901f177515, type: 3}
     - target: {fileID: 3474684698203373802, guid: 65444ff005ac610449492260850a0cbc, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 237

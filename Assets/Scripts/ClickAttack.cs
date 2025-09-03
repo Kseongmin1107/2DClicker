@@ -18,13 +18,18 @@ public class ClickAttack : MonoBehaviour
 
     private bool IsClicked()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return false;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("클릭되었음");
-            return true;    // 좌클릭
+            return true;
         }
-        else
-            return false;
+
+        return false;
     }
 
     private void TryAttack()
