@@ -19,7 +19,9 @@ public class WeaponStats : ScriptableObject
 
     public EnhanceLevel GetEnhanceLevel(int level)  // 강화레벨정보 가져오기
     {
-        if (level >= stats.Length) ;
+        if (level >= stats.Length)
+            level = stats.Length - 1;
+
         return stats[level];    // 0강부터 5강까지
     }
 }
