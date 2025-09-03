@@ -130,6 +130,10 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpdateUpgradeUI()
     {
+        if (GameManager.Instance != null && GameManager.Instance.Player != null)
+    {
+        Debug.Log("현재 골드: " + GameManager.Instance.Player.gold + " | 다음 레벨 비용: " + nextLevelCost);
+    }
         levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
         switch (statType)
         {
