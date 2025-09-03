@@ -38,7 +38,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (GameManager.Instance != null) //게임이 시작될 때 플레이어의 이전 상황 업그레이드 불러오기
         {
-            GameManager.Instance.playerGold.OnGoldChanged += OnPlayerGoldChanged;
+            GameManager.Instance.playerGold.OnGoldChanged += OnPlayerGoldChanged;//구독
 
             switch (statType)
             {
@@ -57,7 +57,7 @@ public class UpgradeManager : MonoBehaviour
         UpdateUpgradeUI();
     }
 
-    private void OnDisable()
+    private void OnDisable() //구독 해제 (메모리 누수를 막으려고)
     {
         if (GameManager.Instance != null)
         {
@@ -65,7 +65,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    private void OnPlayerGoldChanged(double newGold)
+    private void OnPlayerGoldChanged(double newGold) //playerGold.OnGoldChanged 이벤트가 발생할 때 호출
     {
         UpdateUpgradeUI();
     }
