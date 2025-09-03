@@ -15,6 +15,11 @@ public class StageManager : MonoBehaviour
 
     public Enemy CurrentEnemy;
 
+    public Transform spawnPoint;
+
+    Vector3 SpawnPos => spawnPoint.position;
+    Quaternion spawnRot => spawnPoint.rotation;
+
     private void Start()
     {
         SpawnEnemy();
@@ -24,7 +29,7 @@ public class StageManager : MonoBehaviour
     {
         if (currentWave == 0)
         {
-            CurrentEnemy = Instantiate(stages[currentStage].enemyPrefab);
+            CurrentEnemy = Instantiate(stages[currentStage].enemyPrefab, SpawnPos, spawnRot);
         }
         else
         {
