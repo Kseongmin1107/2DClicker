@@ -20,6 +20,8 @@ public class Weapon : MonoBehaviour
     public int level = 0;
     private EnhanceLevel currentStat;
 
+
+
     private void Start()
     {
         level = 0;

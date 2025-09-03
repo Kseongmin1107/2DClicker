@@ -9,6 +9,9 @@ public class WeaponStats : ScriptableObject
     public string[] weaponName;
     public EnhanceLevel[] stats;    // 강화별 스탯
 
+    public float baseAttackPower;
+    public float baseCriticalRate;  // 무기별 베이스 스탯
+
     public string GetWeaponName(int level)
     {
         int nameIndex = level / 6;  // 0~5강 이름1, 그다음 이름2
