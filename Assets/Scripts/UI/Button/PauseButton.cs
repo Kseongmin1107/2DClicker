@@ -8,7 +8,11 @@ public class PauseButton : MonoBehaviour
     public Button pauseButton;
     public Button pauseCloseBtn;
     public Button homeButton;
+    public Button ResetBtn;
+    public Button ResetYesBtn;
+    public Button ResetNoBtn;
     public GameObject option;
+    public GameObject resetPopup;
 
     private void Awake()
     {
@@ -16,7 +20,10 @@ public class PauseButton : MonoBehaviour
         pauseCloseBtn.onClick.AddListener(CloseOption);
         homeButton.onClick.AddListener(GoTitle);
 
-;    }
+        ResetBtn.onClick.AddListener(OpenResetPopup);
+        ResetNoBtn.onClick.AddListener(CancelReset);
+
+    }
 
     void Pause()
     {
@@ -34,5 +41,21 @@ public class PauseButton : MonoBehaviour
     {
         Time.timeScale = 1f;
         UIManager.Instance.LoadScene("TitleScene");
+    }
+
+
+    void OpenResetPopup()
+    {
+        resetPopup.SetActive(true);
+    }
+
+    private void Reset()
+    {
+
+    }
+
+    void CancelReset()
+    {
+        resetPopup.SetActive(false);
     }
 }
