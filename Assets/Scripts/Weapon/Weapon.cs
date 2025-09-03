@@ -15,7 +15,6 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private Text attackText;   // 스탯 연결
     [SerializeField] private Text criticalText;
-    [SerializeField] private Text attackSpeedText;
 
     public int level = 0;
     private EnhanceLevel currentStat;
@@ -32,7 +31,7 @@ public class Weapon : MonoBehaviour
             UpdateEnhanceUI();
 
             Debug.Log($"+{level}강");
-            Debug.Log($"공격력:{currentStat.attackPower}, 치명타:{currentStat.criticalRate}, 공격속도:{currentStat.attackSpeed}");
+            Debug.Log($"공격력:{currentStat.attackPower}, 치명타:{currentStat.criticalRate}");
 
         //int cost = GetEnhanceCost(level + 1);
         //if (gold < cost)
@@ -77,8 +76,6 @@ public class Weapon : MonoBehaviour
             attackText.text = "공격력 : " + currentStat.attackPower.ToString();
         if (criticalText != null)
             criticalText.text = "치명타 : " + currentStat.criticalRate.ToString("F2");      // 소수점으로 바꾸자
-        if (attackSpeedText != null)
-            attackSpeedText.text = "공격속도 : " + currentStat.attackSpeed.ToString("F2");
 
     }
 }
