@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     private PlayerData playerData = new PlayerData();
     private PlayerGold playergold = new PlayerGold();
+    public StageManager StageManager;
 
     public event Action<double> OnGoldChanged;
 
