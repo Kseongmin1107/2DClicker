@@ -157,7 +157,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.Player != null)
     {
-        Debug.Log("���� ���: " + GameManager.Instance.Player.gold + " | ���� ���� ���: " + nextLevelCost);
+        Debug.Log("���� ���: " + GameManager.Instance.playerGold.Gold + " | ���� ���� ���: " + nextLevelCost);
     }
         levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
         switch (statType)
@@ -172,7 +172,7 @@ public class UpgradeManager : MonoBehaviour
         }
         costText.text = nextLevelCost.ToString();
 
-        if (GameManager.Instance != null && GameManager.Instance.Player.gold >= nextLevelCost)
+        if (GameManager.Instance != null && GameManager.Instance.playerGold.Gold >= nextLevelCost)
         {
             costText.color = affordableColor;
         }

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerGold
 {
-    //테스트용으로 돈 넣기위해 serial넣었음. 나중에 빼야함.
     private double gold;
 
     public event Action<double> OnGoldChanged;
