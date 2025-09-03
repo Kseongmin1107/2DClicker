@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class ClickAttack : MonoBehaviour
 {
+    [SerializeField] private GameObject attackEffectPrefab;
+
     void Update()
     {
         
@@ -16,13 +18,18 @@ public class ClickAttack : MonoBehaviour
 
     private bool IsClicked()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return false;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("클릭되었음");
-            return true;    // 좌클릭
+            return true;
         }
-        else
-            return false;
+
+        return false;
     }
 
     private void TryAttack()
@@ -35,6 +42,17 @@ public class ClickAttack : MonoBehaviour
 
     public void Attack()
     {
+        Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        clickPosition.z = 0;
+
+        if (attackEffectPrefab != null)
+        {
+            Instantiate(attackEffectPrefab, clickPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("Attack Effect Prefab이 할당되지 않았습니다.");
+        }
         // 공격 애니메이션
         // 데미지 처리
         // 점수 올라가게

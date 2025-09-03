@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -35,8 +36,10 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance != null) //°ÔÀÓÀÌ ½ÃÀÛµÉ ¶§ ÇÃ·¹ÀÌ¾îÀÇ ÀÌÀü »óÈ² ¾÷±×·¹ÀÌµå ºÒ·¯¿À±â
+        if (GameManager.Instance != null) //ê²Œì„ì´ ì‹œì‘ë  ë•Œ í”Œë ˆì´ì–´ì˜ ì´ì „ ìƒí™© ì—…ê·¸ë ˆì´ë“œ ë¶ˆëŸ¬ì˜¤ê¸°
         {
+            GameManager.Instance.playerGold.OnGoldChanged += OnPlayerGoldChanged;//êµ¬ë…
+
             switch (statType)
             {
                 case StatType.CriticalDamage:
@@ -50,6 +53,20 @@ public class UpgradeManager : MonoBehaviour
                     break;
             }
         }
+        UpdateUpgradeData();
+        UpdateUpgradeUI();
+    }
+
+    private void OnDisable() //êµ¬ë… í•´ì œ (ë©”ëª¨ë¦¬ ëˆ„ìˆ˜ë¥¼ ë§‰ìœ¼ë ¤ê³ )
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.playerGold.OnGoldChanged -= OnPlayerGoldChanged;
+        }
+    }
+
+    private void OnPlayerGoldChanged(double newGold) //playerGold.OnGoldChanged ì´ë²¤íŠ¸ê°€ ë°œìƒí•  ë•Œ í˜¸ì¶œ
+    {
         UpdateUpgradeUI();
     }
 
@@ -72,7 +89,6 @@ public class UpgradeManager : MonoBehaviour
 
     private IEnumerator AutoUpgradeLoop()
     {
-        UpgradeAndCheckCost();
         while (true)
         {
             yield return new WaitForSeconds(0.2f);
@@ -84,15 +100,20 @@ public class UpgradeManager : MonoBehaviour
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager.Instance is not found!");
+            Debug.LogError("ê²Œì„ë§¤ë‹ˆì € ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
             return;
         }
 
         if (GameManager.Instance.TrySpendGold(nextLevelCost))
         {
             currentLevel++;
+            UpdateUpgradeData();
             UpdateUpgradeUI();
             UpdateFinalStat();
+        }
+        else
+        {
+            StopAutoUpgrade();
         }
     }
 
@@ -101,35 +122,13 @@ public class UpgradeManager : MonoBehaviour
         UpgradeAndCheckCost();
     }
 
-    public void UpdateUpgradeUI()
+    private void UpdateUpgradeData()
     {
         currentValue = upgradeData.baseValue + (currentLevel * upgradeData.valueIncreasePerLevel);
         nextLevelCost = upgradeData.baseCost + (currentLevel * (int)upgradeData.costIncreasePerLevel);
 
-        levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
-        switch (statType)
-        {
-            case StatType.CriticalDamage:
-            case StatType.GoldBonus:
-                valueText.text = "+" + currentValue.ToString("F1") + "%";
-                break;
-            case StatType.AutoAttack:
-                valueText.text = currentValue.ToString("F1") + "È¸/ÃÊ";
-                break;
-        }
-
         costText.text = nextLevelCost.ToString();
 
-        if (GameManager.Instance != null && GameManager.Instance.Player.gold >= nextLevelCost)
-        {
-            costText.color = affordableColor;
-        }
-        else
-        {
-            costText.color = insufficientColor;
-        }
-
-        // PlayerData¿¡ ÇöÀç ¾÷±×·¹ÀÌµå ·¹º§ ÀúÀå
         if (GameManager.Instance != null)
         {
             switch (statType)
@@ -146,12 +145,36 @@ public class UpgradeManager : MonoBehaviour
             }
         }
     }
+    public void UpdateUpgradeUI()
+    {
+        levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
+        switch (statType)
+        {
+            case StatType.CriticalDamage:
+            case StatType.GoldBonus:
+                valueText.text = "+" + currentValue.ToString("F1") + "%";
+                break;
+            case StatType.AutoAttack:
+                valueText.text = currentValue.ToString("F1") + "íšŒ/ì´ˆ";
+                break;
+        }
+        costText.text = nextLevelCost.ToString();
+
+        if (GameManager.Instance != null && GameManager.Instance.playerGold.Gold >= nextLevelCost)
+        {
+            costText.color = affordableColor;
+        }
+        else
+        {
+            costText.color = insufficientColor;
+        }
+    }
 
     private void UpdateFinalStat()
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager.Instance is not found!");
+            Debug.LogError("ê²Œì„ë§¤ë‹ˆì € ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
             return;
         }
         switch (statType)

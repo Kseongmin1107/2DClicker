@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[SerializeField]
+[System.Serializable]
 public class PlayerData
 {
     public int currentStage = 1;
+    public double gold = 0;
 
-
-    public double gold;
     public double baseAttack;
     public float baseCritChance;
     public float baseCritDamage;

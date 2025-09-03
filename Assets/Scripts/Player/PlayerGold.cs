@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGold : MonoBehaviour
+public class PlayerGold
 {
-    [SerializeField] private double gold = 0;
+    private double gold = -1;
 
     public event Action<double> OnGoldChanged;
     public double Gold => gold;

@@ -5,31 +5,23 @@ using UnityEngine;
 public class WarningPopup : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
-    public GameObject gameObject;
     public float showDuration = 1.2f;
     public float fadeDuration = 0.25f;
 
     Coroutine current;
 
-    private void Reset()
-    {
-        canvasGroup = GetComponent<CanvasGroup>();
-    }
-
-    public void Show(GameObject obj)
+    public void Show()
     {
         if (current != null)
         {
             StopCoroutine(current);
         }
-        current = StartCoroutine(Coshow(obj));
+        current = StartCoroutine(Coshow());
     }
 
-    IEnumerator Coshow(GameObject obj)
+    IEnumerator Coshow()
     {
-        gameObject = obj;
         canvasGroup.alpha = 1f;
-        gameObject.SetActive(true);
 
         yield return new WaitForSeconds(showDuration);
 
@@ -41,7 +33,6 @@ public class WarningPopup : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 0f;
-        gameObject.SetActive(false);
         current = null;
 
     }

@@ -1,0 +1,166 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a45637507005c6045ba983802c2d1fe0, type: 3}
+  m_Name: WeaponStatData
+  m_EditorClassIdentifier: 
+  weaponName:
+  - "\uB098\uBB34\uAC80"
+  - "\uCCA0\uAC80"
+  - "\uB871\uC18C\uB4DC"
+  - "\uC2A4\uD305\uAC70"
+  - "\uADF8\uB808\uC774\uD2B8\uC18C\uB4DC"
+  - "\uBE14\uB7EC\uB4DC\uC2AC\uB808\uC774\uC5B4"
+  - "\uBB38\uB77C\uC774\uD2B8\uC18C\uB4DC"
+  - "\uC194\uB77C\uC18C\uB4DC"
+  - "\uD5E4\uBE44\uC18C\uB4DC"
+  - "\uD5E4\uBE10\uC2A4\uD53C\uC5B4"
+  - "\uD640\uB9AC\uC18C\uB4DC"
+  - "\uAE00\uB808\uC774\uC154\uC18C\uB4DC"
+  - "\uB2E4\uD06C\uB2C8\uC2A4\uBE0C\uB9C1\uAC70"
+  - "\uC5B4\uC2A4\uC2A4\uD305\uAC70"
+  - "\uC544\uC774\uC5B8\uC2A4\uD30C\uC774\uD06C"
+  - "\uD50C\uB808\uC784\uB9AC\uD37C"
+  - "\uC0E4\uD504\uC0E4\uD06C"
+  - "\uCC98\uD615\uAC80"
+  - "\uC36C\uD30C\uC774\uC5B4"
+  - "\uD5E4\uBE0C\uB2C8\uC2A4"
+  - "\uC9C0\uC625\uADC0"
+  - "\uB4DC\uB798\uACE4\uC2AC\uB808\uC774\uC5B4"
+  - "\uD5EC\uD30C\uC774\uC5B4"
+  - "\uD2B8\uC708\uC194\uB77C\uC2A4\uD53C\uC5B4"
+  - "\uBE14\uB808\uC774\uC988\uD3EC\uC9C0"
+  - "\uC36C\uBE0C\uB9C1\uAC70"
+  - "\uBB38\uD06C\uB7EC\uC154"
+  - "\uC874\uC7AC\uB97C \uC9C0\uC6B0\uB294 \uAC80"
+  - "\uADF8\uB798\uBE44\uD2F0\uBE14\uB808\uC774\uB4DC"
+  - "\uB9C8\uAC80"
+  stats:
+  - level: 0
+    attackPower: 1
+    criticalRate: 0.1
+    attackSpeed: 1
+  - level: 1
+    attackPower: 2
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 2
+    attackPower: 3
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 3
+    attackPower: 4
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 4
+    attackPower: 5
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 5
+    attackPower: 6
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 6
+    attackPower: 7
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 7
+    attackPower: 8
+    criticalRate: 2
+    attackSpeed: 1
+  - level: 8
+    attackPower: 9
+    criticalRate: 2
+    attackSpeed: 1
+  - level: 0
+    attackPower: 1
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 0
+    attackPower: 1
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 0
+    attackPower: 1
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 0
+    attackPower: 1
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 0
+    attackPower: 1
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 0
+    attackPower: 1
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 0
+    attackPower: 1
+    criticalRate: 1
+    attackSpeed: 1
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3
+  - level: 0
+    attackPower: 15
+    criticalRate: 10
+    attackSpeed: 3

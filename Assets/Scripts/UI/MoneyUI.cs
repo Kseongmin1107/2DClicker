@@ -9,7 +9,7 @@ public class MoneyUI : MonoBehaviour
 
     private void Start()
     {
-        var gold = Player.Instance.Gold;
+        var gold = GameManager.Instance.playerGold;
         if (gold != null)
         {
             gold.OnGoldChanged += HandleGoldChanged;
@@ -18,8 +18,8 @@ public class MoneyUI : MonoBehaviour
     }
     private void OnDisable()
     {
-        var gold = Player.Instance.Gold;
-        if(gold != null)
+        var gold = GameManager.Instance.playerGold;
+        if (gold != null)
         {
             gold.OnGoldChanged -= HandleGoldChanged;
         }
@@ -29,7 +29,7 @@ public class MoneyUI : MonoBehaviour
     {
         if(haveGold != null)
         {
-            haveGold.text = changed.ToString("0,0");
+            haveGold.text = changed.ToString("#,0");
         }
     }
 }

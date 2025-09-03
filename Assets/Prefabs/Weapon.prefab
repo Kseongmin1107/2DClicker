@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7667475547831151337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2582573233490389975}
+  - component: {fileID: 1451152354917075055}
+  - component: {fileID: 5739103519489933518}
+  - component: {fileID: 5396593583586829522}
+  m_Layer: 5
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2582573233490389975
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7667475547831151337}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1451152354917075055
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7667475547831151337}
+  m_CullTransparentMesh: 1
+--- !u!114 &5739103519489933518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7667475547831151337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5396593583586829522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7667475547831151337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d57c7e4e2e47244b4bbe90c59ef9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statData: {fileID: 11400000, guid: feb9e4fd1b47cea4793d2d589cbc842a, type: 2}
+  weaponNameText: {fileID: 0}
+  levelTexts: []
+  weaponImage: {fileID: 0}
+  weaponSprites:
+  - {fileID: 21300000, guid: 0db615edf21b75d4e8db50bb4d139927, type: 3}
+  - {fileID: 21300000, guid: 0cc5f60eb4728e249b18312191945b9d, type: 3}
+  - {fileID: 21300000, guid: 43ca270b403766044999d5c91ca58898, type: 3}
+  - {fileID: 21300000, guid: 391316507005cc142bcce3376aad6208, type: 3}
+  - {fileID: 21300000, guid: fdd97aa1bc522974ea843a07419d1878, type: 3}
+  - {fileID: 21300000, guid: 075e4d2aa0bf2e646a92767263a922be, type: 3}
+  - {fileID: 21300000, guid: 1f530f9d2d485b94587181a69e64373e, type: 3}
+  - {fileID: 21300000, guid: a042a0e94bc9cf1449b89f1917fda214, type: 3}
+  - {fileID: 21300000, guid: f360ef9a2104e1b4db1e097710eeb756, type: 3}
+  - {fileID: 21300000, guid: 43ca270b403766044999d5c91ca58898, type: 3}
+  - {fileID: 21300000, guid: 2c3d037d21e3ea44da85fd6e97c92436, type: 3}
+  - {fileID: 21300000, guid: 4151906497e3c7740a969f0762d9e540, type: 3}
+  - {fileID: 21300000, guid: e653f5ebc4fe2ab40a511a6bb3b620e2, type: 3}
+  - {fileID: 21300000, guid: 0cc5f60eb4728e249b18312191945b9d, type: 3}
+  - {fileID: 21300000, guid: a71bf3fb42756d443a620d3bd5ea8ab9, type: 3}
+  - {fileID: 21300000, guid: e1d4aba5f73cbb24fa95f57e12b9b8f7, type: 3}
+  - {fileID: 21300000, guid: 232aa866936ce234cbd58d00b76a6506, type: 3}
+  - {fileID: 21300000, guid: 24f6a002ccff8e543b8f33c0b8690403, type: 3}
+  - {fileID: 21300000, guid: 60c6be0d55513ca41b1c0308637275ae, type: 3}
+  - {fileID: 21300000, guid: bddcbd8eb63001942a36c5c39232c5f8, type: 3}
+  - {fileID: 21300000, guid: 72a92d29ad8f909448e6afa67be5f7f2, type: 3}
+  - {fileID: 21300000, guid: d6de5e60b4f183b4dbe50a4f34a195f7, type: 3}
+  - {fileID: 21300000, guid: 0651ec519aa430245ae03b665b1a4228, type: 3}
+  - {fileID: 21300000, guid: 3e080dad299e83045aac7e954ec9fcb5, type: 3}
+  - {fileID: 21300000, guid: c9b3a384dd8c75c4d9a38d6496c76bf1, type: 3}
+  - {fileID: 21300000, guid: eec28e7cae0b30c41bbd135ba2376969, type: 3}
+  - {fileID: 21300000, guid: 3a3bf7613c622eb4ca3a9b4e06c42179, type: 3}
+  - {fileID: 21300000, guid: f1b49a01585dfff44b6601444862a317, type: 3}
+  - {fileID: 21300000, guid: eb6ab4d4584b00540907099340ee5655, type: 3}
+  - {fileID: 21300000, guid: 96cf14c667fea854cbd94e49ae6d29f1, type: 3}
+  attackText: {fileID: 0}
+  criticalText: {fileID: 0}
+  attackSpeedText: {fileID: 0}
+  level: 0

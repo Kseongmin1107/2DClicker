@@ -283,8 +283,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickAttack: {fileID: 538856860}
-  autoLevel: 1
-  interval: 1
 --- !u!1 &924072790
 GameObject:
   m_ObjectHideFlags: 0
