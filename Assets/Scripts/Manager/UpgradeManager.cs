@@ -35,7 +35,7 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance != null) //°ÔÀÓÀÌ ½ÃÀÛµÉ ¶§ ÇÃ·¹ÀÌ¾îÀÇ ÀÌÀü »óÈ² ¾÷±×·¹ÀÌµå ºÒ·¯¿À±â
+        if (GameManager.Instance != null) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ûµï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È² ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             switch (statType)
             {
@@ -85,11 +85,11 @@ public class UpgradeManager : MonoBehaviour
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("°ÔÀÓ¸Å´ÏÀú ÀÎ½ºÅÏ½º¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
+            Debug.LogError("ï¿½ï¿½ï¿½Ó¸Å´ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
             return;
         }
 
-        if (GameManager.Instance.TrySpendGold(nextLevelCost))
+        if (GameManager.Instance.playerGold.TrySpendGold(nextLevelCost))
         {
             currentLevel++;
             UpdateUpgradeData();
@@ -112,6 +112,31 @@ public class UpgradeManager : MonoBehaviour
         currentValue = upgradeData.baseValue + (currentLevel * upgradeData.valueIncreasePerLevel);
         nextLevelCost = upgradeData.baseCost + (currentLevel * (int)upgradeData.costIncreasePerLevel);
 
+        levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
+        switch (statType)
+        {
+            case StatType.CriticalDamage:
+            case StatType.GoldBonus:
+                valueText.text = "+" + currentValue.ToString("F1") + "%";
+                break;
+            case StatType.AutoAttack:
+                valueText.text = currentValue.ToString("F1") + "È¸/ï¿½ï¿½";
+                break;
+        }
+
+        costText.text = nextLevelCost.ToString();
+
+        if (GameManager.Instance != null && GameManager.Instance.playerGold.Gold >= nextLevelCost)
+        {
+            costText.color = affordableColor;
+        }
+        else
+        {
+            costText.color = insufficientColor;
+        }
+
+        // PlayerDataï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
         if (GameManager.Instance != null)
         {
             switch (statType)
@@ -132,7 +157,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.Player != null)
     {
-        Debug.Log("ÇöÀç °ñµå: " + GameManager.Instance.Player.gold + " | ´ÙÀ½ ·¹º§ ºñ¿ë: " + nextLevelCost);
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: " + GameManager.Instance.Player.gold + " | ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: " + nextLevelCost);
     }
         levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
         switch (statType)
@@ -142,7 +167,7 @@ public class UpgradeManager : MonoBehaviour
                 valueText.text = "+" + currentValue.ToString("F1") + "%";
                 break;
             case StatType.AutoAttack:
-                valueText.text = currentValue.ToString("F1") + "È¸/ÃÊ";
+                valueText.text = currentValue.ToString("F1") + "È¸/ï¿½ï¿½";
                 break;
         }
         costText.text = nextLevelCost.ToString();
@@ -161,7 +186,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("°ÔÀÓ¸Å´ÏÀú ÀÎ½ºÅÏ½º¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
+            Debug.LogError("ï¿½ï¿½ï¿½Ó¸Å´ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
             return;
         }
         switch (statType)

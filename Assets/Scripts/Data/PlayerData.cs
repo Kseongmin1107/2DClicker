@@ -8,8 +8,6 @@ public class PlayerData
 {
     public int currentStage = 1;
 
-
-    public double gold;
     public double baseAttack;
     public float baseCritChance;
     public float baseCritDamage;

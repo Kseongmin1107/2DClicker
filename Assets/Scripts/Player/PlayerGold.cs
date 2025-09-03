@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGold : MonoBehaviour
+public class PlayerGold
 {
-    [SerializeField] private double gold = 0;
+    //테스트용으로 돈 넣기위해 serial넣었음. 나중에 빼야함.
+    private double gold;
 
     public event Action<double> OnGoldChanged;
     public double Gold => gold;
