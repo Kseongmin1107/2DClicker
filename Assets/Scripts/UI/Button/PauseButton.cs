@@ -21,6 +21,7 @@ public class PauseButton : MonoBehaviour
         homeButton.onClick.AddListener(GoTitle);
 
         ResetBtn.onClick.AddListener(OpenResetPopup);
+        ResetYesBtn.onClick.AddListener(ResetGame);
         ResetNoBtn.onClick.AddListener(CancelReset);
 
     }
@@ -49,9 +50,12 @@ public class PauseButton : MonoBehaviour
         resetPopup.SetActive(true);
     }
 
-    private void Reset()
+    private void ResetGame()
     {
-
+        resetPopup.SetActive(false);
+        option.SetActive(false);
+        Time.timeScale = 1f;
+        UIManager.Instance.ResetAndLoad("GameManagerScene");
     }
 
     void CancelReset()

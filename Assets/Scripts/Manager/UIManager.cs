@@ -65,6 +65,11 @@ public class UIManager : MonoBehaviour
         StartCoroutine(FadeAndLoadScene(SceneName));
     }
 
+    public void ResetAndLoad(string SceneName)
+    {
+        StartCoroutine(CoResetAndLoad(SceneName));
+    }
+
     private IEnumerator CoFade(float from, float to)
     {
         float t = 0;
@@ -83,6 +88,17 @@ public class UIManager : MonoBehaviour
     {
         yield return CoFade(0, 1);
 
+        SceneManager.LoadScene(sceneName);
+
+        yield return CoFade(1, 0);
+    }
+
+    private IEnumerator CoResetAndLoad(string sceneName)
+    {
+        yield return CoFade(0, 1);
+
+        GameManager.Instance.ResetToDefaults();
+               
         SceneManager.LoadScene(sceneName);
 
         yield return CoFade(1, 0);

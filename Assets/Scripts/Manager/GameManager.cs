@@ -77,4 +77,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ResetToDefaults()
+    {
+        if(File.Exists(Application.persistentDataPath + "/PlayerData.txt"))
+        {
+            File.Delete(Application.persistentDataPath + "/PlayerData.txt");
+        }
+
+        playerData = new PlayerData();
+
+        playergold.SetGold(playerData.gold);
+
+        Save();
+    }
+
 }
