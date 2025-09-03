@@ -127,7 +127,6 @@ public class UpgradeManager : MonoBehaviour
         currentValue = upgradeData.baseValue + (currentLevel * upgradeData.valueIncreasePerLevel);
         nextLevelCost = upgradeData.baseCost + (currentLevel * (int)upgradeData.costIncreasePerLevel);
 
-        costText.text = nextLevelCost.ToString();
 
         if (GameManager.Instance != null)
         {
