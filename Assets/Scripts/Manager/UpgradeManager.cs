@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -35,8 +36,10 @@ public class UpgradeManager : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance != null) //������ ���۵� �� �÷��̾��� ���� ��Ȳ ���׷��̵� �ҷ�����
+        if (GameManager.Instance != null) //게임이 시작될 때 플레이어의 이전 상황 업그레이드 불러오기
         {
+            GameManager.Instance.playerGold.OnGoldChanged += OnPlayerGoldChanged;//구독
+
             switch (statType)
             {
                 case StatType.CriticalDamage:
@@ -51,6 +54,19 @@ public class UpgradeManager : MonoBehaviour
             }
         }
         UpdateUpgradeData();
+        UpdateUpgradeUI();
+    }
+
+    private void OnDisable() //구독 해제 (메모리 누수를 막으려고)
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.playerGold.OnGoldChanged -= OnPlayerGoldChanged;
+        }
+    }
+
+    private void OnPlayerGoldChanged(double newGold) //playerGold.OnGoldChanged 이벤트가 발생할 때 호출
+    {
         UpdateUpgradeUI();
     }
 
@@ -85,7 +101,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("���ӸŴ��� �ν��Ͻ��� ã�� �� �����ϴ�!");
+            Debug.LogError("게임매니저 인스턴스를 찾을 수 없습니다!");
             return;
         }
 
@@ -112,30 +128,7 @@ public class UpgradeManager : MonoBehaviour
         currentValue = upgradeData.baseValue + (currentLevel * upgradeData.valueIncreasePerLevel);
         nextLevelCost = upgradeData.baseCost + (currentLevel * (int)upgradeData.costIncreasePerLevel);
 
-        levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
-        switch (statType)
-        {
-            case StatType.CriticalDamage:
-            case StatType.GoldBonus:
-                valueText.text = "+" + currentValue.ToString("F1") + "%";
-                break;
-            case StatType.AutoAttack:
-                valueText.text = currentValue.ToString("F1") + "ȸ/��";
-                break;
-        }
-
         costText.text = nextLevelCost.ToString();
-
-        if (GameManager.Instance != null && GameManager.Instance.playerGold.Gold >= nextLevelCost)
-        {
-            costText.color = affordableColor;
-        }
-        else
-        {
-            costText.color = insufficientColor;
-        }
-
-        // PlayerData�� ���� ���׷��̵� ���� ����
 
         if (GameManager.Instance != null)
         {
@@ -155,10 +148,6 @@ public class UpgradeManager : MonoBehaviour
     }
     public void UpdateUpgradeUI()
     {
-        if (GameManager.Instance != null && GameManager.Instance.Player != null)
-    {
-        Debug.Log("���� ���: " + GameManager.Instance.playerGold.Gold + " | ���� ���� ���: " + nextLevelCost);
-    }
         levelText.text = upgradeData.upgradeName + " " + currentLevel.ToString();
         switch (statType)
         {
@@ -167,7 +156,7 @@ public class UpgradeManager : MonoBehaviour
                 valueText.text = "+" + currentValue.ToString("F1") + "%";
                 break;
             case StatType.AutoAttack:
-                valueText.text = currentValue.ToString("F1") + "ȸ/��";
+                valueText.text = currentValue.ToString("F1") + "회/초";
                 break;
         }
         costText.text = nextLevelCost.ToString();
@@ -186,7 +175,7 @@ public class UpgradeManager : MonoBehaviour
     {
         if (GameManager.Instance == null)
         {
-            Debug.LogError("���ӸŴ��� �ν��Ͻ��� ã�� �� �����ϴ�!");
+            Debug.LogError("게임매니저 인스턴스를 찾을 수 없습니다!");
             return;
         }
         switch (statType)
