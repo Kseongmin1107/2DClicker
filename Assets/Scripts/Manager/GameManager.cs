@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private PlayerData player = new PlayerData();
+    private PlayerData playerData = new PlayerData();
     private PlayerGold playergold = new PlayerGold();
 
     public event Action<double> OnGoldChanged;
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerData Player
     {
-        get { return player; }
+        get { return playerData; }
     }
 
     public PlayerGold playerGold
@@ -35,8 +35,60 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        Load();
+
         //테스트용골드 1000넣음
-        playerGold.SetGold(1000);
+        if (playergold.Gold == -1)
+        {
+            playerGold.SetGold(1000);
+        }
+
+        else
+        {
+            playergold.SetGold(playerData.gold);
+        }
+        playergold.OnGoldChanged += v => playerData.gold = v;
+    }
+
+    void Save()
+    {
+        // 직렬화
+        var saveData = JsonUtility.ToJson(playerData);
+
+        //저장
+        File.WriteAllText(Application.persistentDataPath + "/PlayerData.txt", saveData);
+
+        Debug.Log(Application.persistentDataPath);
+    }
+
+
+    void Load()
+    {
+        if (File.Exists(Application.persistentDataPath + "/PlayerData.txt"))
+        {//불러오기
+            var loadData = File.ReadAllText(Application.persistentDataPath + "/PlayerData.txt");
+
+            //역직렬화
+            playerData = JsonUtility.FromJson<PlayerData>(loadData);
+        }
+        else
+        {
+            playerData  = new PlayerData();
+        }
+    }
+
+    public void ResetToDefaults()
+    {
+        if(File.Exists(Application.persistentDataPath + "/PlayerData.txt"))
+        {
+            File.Delete(Application.persistentDataPath + "/PlayerData.txt");
+        }
+
+        playerData = new PlayerData();
+
+        playergold.SetGold(playerData.gold);
+
+        Save();
     }
 
 }

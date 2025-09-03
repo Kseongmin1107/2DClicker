@@ -29,7 +29,7 @@ public class MoneyUI : MonoBehaviour
     {
         if(haveGold != null)
         {
-            haveGold.text = changed.ToString("0,0");
+            haveGold.text = changed.ToString("#,0");
         }
     }
 }

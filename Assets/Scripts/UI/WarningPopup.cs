@@ -5,7 +5,7 @@ using UnityEngine;
 public class WarningPopup : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
-    public GameObject gameObject;
+    public GameObject PopupObject;
     public float showDuration = 1.2f;
     public float fadeDuration = 0.25f;
 
@@ -27,9 +27,9 @@ public class WarningPopup : MonoBehaviour
 
     IEnumerator Coshow(GameObject obj)
     {
-        gameObject = obj;
+        PopupObject = obj;
         canvasGroup.alpha = 1f;
-        gameObject.SetActive(true);
+        PopupObject.SetActive(true);
 
         yield return new WaitForSeconds(showDuration);
 
@@ -41,7 +41,7 @@ public class WarningPopup : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 0f;
-        gameObject.SetActive(false);
+        PopupObject.SetActive(false);
         current = null;
 
     }
