@@ -13,9 +13,8 @@ public class Weapon : MonoBehaviour
     public Image weaponImage;
     [SerializeField] private Sprite[] weaponSprites;
 
-    [SerializeField] private Text attackText;   // ½ºÅÈ ¿¬°á
+    [SerializeField] private Text attackText;   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private Text criticalText;
-    [SerializeField] private Text attackSpeedText;
 
     public int level = 0;
     private EnhanceLevel currentStat;
@@ -31,13 +30,13 @@ public class Weapon : MonoBehaviour
             level++;
             UpdateEnhanceUI();
 
-            Debug.Log($"+{level}°­");
-            Debug.Log($"°ø°Ý·Â:{currentStat.attackPower}, Ä¡¸íÅ¸:{currentStat.criticalRate}, °ø°Ý¼Óµµ:{currentStat.attackSpeed}");
+            Debug.Log($"+{level}ï¿½ï¿½");
+            Debug.Log($"ï¿½ï¿½ï¿½Ý·ï¿½:{currentStat.attackPower}, Ä¡ï¿½ï¿½Å¸:{currentStat.criticalRate}");
 
         //int cost = GetEnhanceCost(level + 1);
         //if (gold < cost)
         //{
-        //    Debug.Log("°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù");
+        //    Debug.Log("ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½");
         //    return;
         //}
         
@@ -48,7 +47,7 @@ public class Weapon : MonoBehaviour
 
     //private int GetEnhanceCost(int nextLevel)
     //{
-    //    return nextLevel * 200;     // °­È­ºñ¿ë °¥¼ö·Ï Áõ°¡
+    //    return nextLevel * 200;     // ï¿½ï¿½È­ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     //}
 
     public void UpdateEnhanceUI()
@@ -57,28 +56,26 @@ public class Weapon : MonoBehaviour
         int spriteIndex = level / 6;
 
         for (int i = 0; i < levelTexts.Length; i++)
-            levelTexts[i].SetActive(i == localLevel);   // ÅØ½ºÆ® ¹Ýº¹µÇ°Ô
+            levelTexts[i].SetActive(i == localLevel);   // ï¿½Ø½ï¿½Æ® ï¿½Ýºï¿½ï¿½Ç°ï¿½
 
         if (weaponNameText != null && statData != null)
-            weaponNameText.text = statData.GetWeaponName(level);    // ¹«±â ÀÌ¸§
+            weaponNameText.text = statData.GetWeaponName(level);    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
 
         if (weaponImage != null && weaponSprites != null && weaponSprites.Length > spriteIndex)
         {
-            weaponImage.sprite = weaponSprites[spriteIndex];       // ¹«±â ÀÌ¹ÌÁö(½ºÇÁ¶óÀÌÆ®)
+            weaponImage.sprite = weaponSprites[spriteIndex];       // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®)
         }
 
         if (statData != null)
-            currentStat = statData.GetEnhanceLevel(level);     // ÇöÀç ½ºÅÈ °¡Á®¿À±â
+            currentStat = statData.GetEnhanceLevel(level);     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         else
             currentStat = new EnhanceLevel();
 
 
         if (attackText != null)
-            attackText.text = "°ø°Ý·Â : " + currentStat.attackPower.ToString();
+            attackText.text = "ï¿½ï¿½ï¿½Ý·ï¿½ : " + currentStat.attackPower.ToString();
         if (criticalText != null)
-            criticalText.text = "Ä¡¸íÅ¸ : " + currentStat.criticalRate.ToString("F2");      // ¼Ò¼öÁ¡À¸·Î ¹Ù²ÙÀÚ
-        if (attackSpeedText != null)
-            attackSpeedText.text = "°ø°Ý¼Óµµ : " + currentStat.attackSpeed.ToString("F2");
+            criticalText.text = "Ä¡ï¿½ï¿½Å¸ : " + currentStat.criticalRate.ToString("F2");      // ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½
 
     }
 }

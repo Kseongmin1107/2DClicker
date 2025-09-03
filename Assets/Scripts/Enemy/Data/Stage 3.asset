@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Stage 3
   m_EditorClassIdentifier: 
   map: {fileID: 0}
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 5520082854527905039, guid: 58f9c9da0a7cc0f4ea33179e5103dbff, type: 3}
