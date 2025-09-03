@@ -11,6 +11,9 @@ public class PlayerData
 
     public double Attack;
     public float CritChance;
+    public int atkUpgradLevel;
+    public float baseCritDamage;
+    public float baseGoldBonus;
 
     public int critDamageUpgradeLevel;
     public int goldBonusUpgradeLevel;
