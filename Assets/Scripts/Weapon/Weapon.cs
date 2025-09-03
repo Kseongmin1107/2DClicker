@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     //[SerializeField] private int gold = 1000;
 
     [SerializeField] private Text weaponNameText;
+    [SerializeField] private Text weaponMainNameText;
     [SerializeField] private GameObject[] levelTexts;
     public Image weaponImage;
     [SerializeField] private Sprite[] weaponSprites;
@@ -60,6 +61,9 @@ public class Weapon : MonoBehaviour
 
         if (weaponNameText != null && statData != null)
             weaponNameText.text = statData.GetWeaponName(level);    // 무기 이름
+
+        if (weaponMainNameText != null && statData != null)
+            weaponMainNameText.text = statData.GetWeaponName(level);
 
         if (weaponImage != null && weaponSprites != null && weaponSprites.Length > spriteIndex)
         {
