@@ -30,24 +30,9 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private void OnEnable()
+    private void HandleSpendFailed()
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.OnSpendFailed += HandleSpendFailed;
-        }
-    }
-    private void OnDisable()
-    {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.OnSpendFailed -= HandleSpendFailed;
-        }
-    }
-
-    private void HandleSpendFailed(GameObject popup)
-    {
-        popup.SetActive(true);
+        warningPopup.Show();
     }
 
     public void FadeIn()

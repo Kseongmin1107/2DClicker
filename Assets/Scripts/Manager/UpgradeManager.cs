@@ -104,7 +104,7 @@ public class UpgradeManager : MonoBehaviour
             return;
         }
 
-        if (GameManager.Instance.playerGold.TrySpendGold(nextLevelCost))
+        if (GameManager.Instance.TrySpendGold(nextLevelCost))
         {
             currentLevel++;
             UpdateUpgradeData();

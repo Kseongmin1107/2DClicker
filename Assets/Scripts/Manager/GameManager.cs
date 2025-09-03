@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     private PlayerGold playergold = new PlayerGold();
 
     public event Action<double> OnGoldChanged;
-    public event Action<GameObject> OnSpendFailed;
 
     public PlayerData Player
     {
@@ -50,6 +49,8 @@ public class GameManager : MonoBehaviour
         playergold.OnGoldChanged += v => playerData.gold = v;
     }
 
+
+    // Save and Load
     void Save()
     {
         // Á÷·ÄÈ­
@@ -77,6 +78,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    // Game Reset
     public void ResetToDefaults()
     {
         if(File.Exists(Application.persistentDataPath + "/PlayerData.txt"))
@@ -90,5 +93,16 @@ public class GameManager : MonoBehaviour
 
         Save();
     }
+
+    public bool TrySpendGold(double cost)
+    {
+        bool success = playerGold.TrySpendGold(cost);
+        if (!success)
+        {
+            UIManager.Instance.warningPopup.Show();
+        }
+        return success;
+    }
+
 
 }
