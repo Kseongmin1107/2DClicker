@@ -12,6 +12,7 @@ public class WeaponManager : MonoBehaviour
 
     private int currentWeaponIndex = 0;
     private GameObject currentWeapon;
+    private GameObject inventoryCopy;
 
     public static WeaponManager Instance;
 
@@ -38,11 +39,9 @@ public class WeaponManager : MonoBehaviour
 
             Weapon weaponScript = currentWeapon.GetComponent<Weapon>();
 
-            GameObject copy = Instantiate(weaponPrefabs[index], inventorySlot); // 강화무기슬롯을 따라서 인벤토리에도 바뀌게 생성
+            GameObject copy = Instantiate(currentWeapon, inventorySlot); // 강화무기슬롯을 따라서 인벤토리에도 바뀌게 생성
             copy.transform.localPosition = Vector3.zero;
             copy.transform.localScale = Vector3.one;
-
-            currentWeaponIndex = index;
         }
     }
 

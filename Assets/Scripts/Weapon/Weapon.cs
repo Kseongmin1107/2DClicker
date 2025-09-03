@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
     //[SerializeField] private int gold = 1000;
 
     [SerializeField] private Text weaponNameText;
-    [SerializeField] private Text levelText;
+    [SerializeField] private GameObject[] levelTexts;
     public Image weaponImage;
     [SerializeField] private Sprite[] weaponSprites;
 
@@ -58,15 +58,18 @@ public class Weapon : MonoBehaviour
     public void UpdateEnhanceUI()
     {
         int localLevel = level % 6;
+        int spriteIndex = level / 6;
 
-        if (levelText != null)
-            levelText.text = "+" + localLevel;  // +0 ~ +5
+        for (int i = 0; i < levelTexts.Length; i++)
+            levelTexts[i].SetActive(i == localLevel);   // 텍스트 반복되게
 
         if (weaponNameText != null && statData != null)
             weaponNameText.text = statData.GetWeaponName(level);    // 무기 이름
 
-        if (weaponImage != null && weaponSprites != null && weaponSprites.Length > localLevel)
-            weaponImage.sprite = weaponSprites[localLevel];       // 무기 이미지(스프라이트)
+        if (weaponImage != null && weaponSprites != null && weaponSprites.Length > spriteIndex)
+        {
+            weaponImage.sprite = weaponSprites[spriteIndex];       // 무기 이미지(스프라이트)
+        }
 
         if (statData != null)
             currentStat = statData.GetEnhanceLevel(level);     // 현재 스탯 가져오기

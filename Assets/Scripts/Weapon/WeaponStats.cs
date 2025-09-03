@@ -13,14 +13,13 @@ public class WeaponStats : ScriptableObject
     {
         int nameIndex = level / 6;  // 0~5강 이름1, 그다음 이름2
         if (nameIndex >= weaponName.Length)
-            nameIndex = weaponName.Length - 1;
+            nameIndex = weaponName.Length - 1;      // 최대 이후에는 안넘어가게
         return weaponName[nameIndex];
     }
 
     public EnhanceLevel GetEnhanceLevel(int level)  // 강화레벨정보 가져오기
     {
-        if (level > 5) level = 5;
-
+        if (level >= stats.Length) ;
         return stats[level];    // 0강부터 5강까지
     }
 }
