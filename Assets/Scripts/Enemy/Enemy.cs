@@ -17,13 +17,13 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Animator animator;
     private static readonly int HashHit = Animator.StringToHash("Hit");
-    private static readonly int HashDie = Animator.StringToHash("Die");
+    private static readonly int HashDead = Animator.StringToHash("IsDead");
 
     private bool isDying;
 
     private void Start()
     {
-        UpdateHpUI();
+
     }
 
     // ★추가: 새로 스폰되거나 SetActive(true) 될 때 자동 초기화
@@ -54,17 +54,14 @@ public class Enemy : MonoBehaviour
         {
 
             //front.localScale = new Vector3(Nowhealth / Fullhealth, 1.0f);
-            //float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
-            //if (back) back.fillAmount = ratio;              // ← fillAmount로 반영
-            UpdateHpUI();
+            float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
+            if (back) back.fillAmount = ratio;              // ← fillAmount로 반영
             animator.SetTrigger(HashHit);
         }
         else
         {
             //front.localScale = new Vector3(0.0f, 1.0f);//필 어마운트로 교체
             Nowhealth = 0f;
-            UpdateHpUI();                 // ← 0으로 고정
-
             IsDie();
         }
         
@@ -72,36 +69,21 @@ public class Enemy : MonoBehaviour
     public void IsDie()
     {
         if (isDying)return;
-
         isDying = true;
-        animator.SetTrigger(HashDie);
-        Debug.Log("으앙주금");
+        animator.SetBool(HashDead, true);
+    }
+    public void Init()
+    {
+        Nowhealth = Fullhealth;
+        if (back) back.fillAmount = 1f;
     }
 
     // ★추가: HP바/애니메이터/플래그를 리스폰 시점에 원상태로
     private void ResetForSpawn()
     {
         isDying = false;              // ← 질문한 부분: 리스폰마다 false로 초기화
-        Nowhealth = Fullhealth;       // 풀 체력
+        animator.ResetTrigger(HashHit);
+        animator.SetBool(HashDead,false);
 
-        // HP UI
-        UpdateHpUI();
-
-        // 애니메이터 초기화(트리거/상태 재설정)
-        if (animator)
-        {
-            animator.ResetTrigger(HashHit);
-            animator.ResetTrigger(HashDie);
-            animator.Rebind();        // 바인딩 리셋
-            animator.Update(0f);      // 즉시 반영
-        }
-    }
-
-    // ★추가: UI 반영을 한 곳에서
-    private void UpdateHpUI()
-    {
-        if (!back) return;
-        float ratio = (Fullhealth <= 0f) ? 0f : Nowhealth / Fullhealth;
-        back.fillAmount = Mathf.Clamp01(ratio);
     }
 }

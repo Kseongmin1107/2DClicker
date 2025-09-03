@@ -10,9 +10,7 @@ public class WeaponManager : MonoBehaviour
     public Transform inventorySlot;     // 슬롯에 무기프리팹이 나타나게 위치설정
     public Transform enhanceSlot;
 
-    private int currentWeaponIndex = 0;
     private GameObject currentWeapon;
-    private GameObject inventoryCopy;
 
     public static WeaponManager Instance;
 
@@ -38,32 +36,6 @@ public class WeaponManager : MonoBehaviour
             currentWeapon.transform.localScale = Vector3.one;
 
             Weapon weaponScript = currentWeapon.GetComponent<Weapon>();
-
-            GameObject copy = Instantiate(currentWeapon, inventorySlot); // 강화무기슬롯을 따라서 인벤토리에도 바뀌게 생성
-            copy.transform.localPosition = Vector3.zero;
-            copy.transform.localScale = Vector3.one;
-        }
-    }
-
-    public void EquipNextWeapon()
-    {
-        int nextIndex = currentWeaponIndex + 1; // 다음무기 프리팹 인덱스 1씩더하기
-        if (nextIndex < weaponPrefabs.Count)
-        {
-            EquipWeapon(nextIndex);
-        }
-        else
-        {
-            Debug.Log("더 이상 강화할 수 없습니다.");
-        }
-    }
-
-    public void UnequipWeapon()
-    {
-        if (currentWeapon != null)
-        {
-            Destroy(currentWeapon);
-            currentWeapon = null;
         }
     }
 

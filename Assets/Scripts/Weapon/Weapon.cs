@@ -33,11 +33,7 @@ public class Weapon : MonoBehaviour
 
             Debug.Log($"+{level}강");
             Debug.Log($"공격력:{currentStat.attackPower}, 치명타:{currentStat.criticalRate}, 공격속도:{currentStat.attackSpeed}");
-        //
-        //
-        //    WeaponManager.Instance.EquipNextWeapon();
-        //    Destroy(gameObject);
-        //
+
         //int cost = GetEnhanceCost(level + 1);
         //if (gold < cost)
         //{
