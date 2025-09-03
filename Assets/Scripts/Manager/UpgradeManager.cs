@@ -89,7 +89,6 @@ public class UpgradeManager : MonoBehaviour
 
     private IEnumerator AutoUpgradeLoop()
     {
-        UpgradeAndCheckCost();
         while (true)
         {
             yield return new WaitForSeconds(0.2f);
