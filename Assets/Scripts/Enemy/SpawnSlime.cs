@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 public class SpawnSlime : MonoBehaviour
-{
+{/*
     [Header("Prefabs (Project 창의 프리팹 자산을 드래그!)")]
     [SerializeField] private GameObject samePrefab;   // 기본 리스폰 프리팹 (보통 자기 자신 프리팹)
     [SerializeField] private GameObject nextPrefab;   // N번 죽이면 교체될 프리팹
@@ -62,5 +62,5 @@ public class SpawnSlime : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Object.Instantiate(prefab, pos, rot, parent);
         Object.Destroy(toDestroy);
-    }
+    }*/
 }

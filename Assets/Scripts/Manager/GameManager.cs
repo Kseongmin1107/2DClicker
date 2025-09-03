@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public event Action<GameObject> OnSpendFailed;
 
     public GameObject GoldWarningPopup;
+    public StageManager StageManager;
 
     public PlayerData Player
     {
