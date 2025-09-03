@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private PlayerData player = new PlayerData();
+    private PlayerData playerData = new PlayerData();
     private PlayerGold playergold = new PlayerGold();
 
     public event Action<double> OnGoldChanged;
@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
 
     public PlayerData Player
     {
-        get { return player; }
+        get { return playerData; }
     }
 
     public PlayerGold playerGold
@@ -36,7 +36,16 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         //테스트용골드 1000넣음
-        playerGold.SetGold(1000);
+        if (playergold.Gold == -1)
+        {
+            playerGold.SetGold(1000);
+        }
+
+        else
+        {
+            playergold.SetGold(playerData.gold);
+        }
+        playergold.OnGoldChanged += v => playerData.gold = v;
     }
 
 }
