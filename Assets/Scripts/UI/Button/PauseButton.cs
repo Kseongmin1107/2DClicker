@@ -55,7 +55,7 @@ public class PauseButton : MonoBehaviour
         resetPopup.SetActive(false);
         option.SetActive(false);
         Time.timeScale = 1f;
-        UIManager.Instance.ResetAndLoad("GameManagerScene");
+        UIManager.Instance.ResetAndLoad("MainScene");
     }
 
     void CancelReset()
