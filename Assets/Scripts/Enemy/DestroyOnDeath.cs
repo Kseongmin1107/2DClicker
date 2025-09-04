@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class DestroyOnDeath : StateMachineBehaviour
 {
-    // Á×À½ ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ ³¡³µÀ» ¶§ È£ÃâµÊ
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È£ï¿½ï¿½ï¿½
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameManager.Instance.StageManager.CheckWave();
+        //GameManager.Instance.StageManager.CheckWave();
 
     }
 }

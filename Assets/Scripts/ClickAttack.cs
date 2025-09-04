@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ClickAttack : MonoBehaviour
 {
-    [SerializeField] private GameObject attackEffectPrefab;
+    [SerializeField] private ParticleSystem attackEffect;
 
     void Update()
     {
@@ -58,16 +58,38 @@ public class ClickAttack : MonoBehaviour
             attackPosition.z = 0;
         }
 
-        if (attackEffectPrefab != null)
+        Weapon currentWeapon = WeaponManager.Instance.GetCurrentWeapon();
+        float currentCriticalRate = 0f;
+        float baseAttackPower = 0f;
+
+        if (currentWeapon != null)
+        {//웨폰 연결 되면 주석 해제
+            //currentCriticalRate = currentWeapon.GetCriticalRate();
+            //baseAttackPower = currentWeapon.GetCurrentAttackPower();
+        }
+
+        bool isCritical = (Random.Range(0f, 1f) < currentCriticalRate); //예를들어서 치명타확률이 20%인데 0.15가 나오면 참으로 치명타가 발생하게됨
+
+
+        float damage = baseAttackPower;
+
+        if (isCritical)
         {
-            Instantiate(attackEffectPrefab, attackPosition, Quaternion.identity);
+            damage *= GameManager.Instance.Player.baseCritDamage;
+            Debug.Log("치명타 발생! 데미지: " + damage);
         }
         else
         {
-            Debug.LogWarning("Attack Effect Prefab이 할당되지 않았습니다.");
+            Debug.Log("일반 공격. 데미지: " + damage);
         }
-        // 공격 애니메이션
-        // 데미지 처리
-        // 점수 올라가게
+        if (attackEffect != null)
+        {
+            attackEffect.transform.position = attackPosition;
+            attackEffect.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Attack Effect가 할당되지 않았습니다.");
+        }
     }
 }
