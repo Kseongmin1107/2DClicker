@@ -11,7 +11,7 @@ public class ClickAttack : MonoBehaviour
     {
         if (IsClicked())
         {
-            TryAttack();
+            Attack();
         }
     }
 
@@ -29,11 +29,6 @@ public class ClickAttack : MonoBehaviour
         }
 
         return false;
-    }
-
-    private void TryAttack()
-    {
-        Attack();
     }
 
     public void Attack(bool isAutoAttack = false)
