@@ -21,7 +21,6 @@ public class StageData : ScriptableObject
     public class OpenCondition
     {
         public int requiredWeaponIndex;
-        public int requiredLevel = 5;
         public double goldCost;
     }
 }
