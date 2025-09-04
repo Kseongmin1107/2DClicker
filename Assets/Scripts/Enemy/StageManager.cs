@@ -117,10 +117,10 @@ public class StageManager : MonoBehaviour
         {
             fieldBackGround.sprite = data.map;
         }
-        if (data.bgm)
-        {
-            AudioManager.Instance.FadeTo(data.bgm, 1.0f);
-        }
+        //if (data.bgm)
+        //{
+        //    AudioManager.Instance.FadeTo(data.bgm, 1.0f);
+        //}
     }
     public void SpawnEnemy(StageData data)
     {
