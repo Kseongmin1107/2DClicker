@@ -14,16 +14,15 @@ public class Weapon : MonoBehaviour
     public Image weaponImage;
     [SerializeField] private Sprite[] weaponSprites;
 
-    [SerializeField] private Text attackText;   // �����ؽ�Ʈ ����
+    [SerializeField] private Text attackText;   // 스탯 텍스트 연결
     [SerializeField] private Text criticalText;
 
     public int level = 0;
     private int currentAttack;
     private float currentCritical;
 
-    public PlayerGold playerGold;   // ��� ����
 
-    [SerializeField] private Text enhanceCostText;  // ��ȭ����ؽ�Ʈ
+    [SerializeField] private Text enhanceCostText;  // 강화비용 텍스트
 
 
     private void Start()
@@ -38,9 +37,9 @@ public class Weapon : MonoBehaviour
     {
         int cost = GetEnhanceCost(level + 1);
 
-        if (playerGold == null || !playerGold.TrySpendGold(cost))
+        if (GameManager.Instance.playerGold == null || !GameManager.Instance.playerGold.TrySpendGold(cost))
         {
-            Debug.Log("��尡 �����մϴ�");     // �˾�
+            Debug.Log("강화 성공");
             return;
         }
 
@@ -49,9 +48,9 @@ public class Weapon : MonoBehaviour
         UpdateEnhanceUI();
         GameManager.Instance.Save();
 
-        Debug.Log($"+{level}��");
-        Debug.Log($"���ݷ�:{currentAttack}, ġ��Ÿ:{currentCritical}");
-        Debug.Log($"��ȭ��� {cost}");
+        Debug.Log($"+{level}");
+        Debug.Log($"공격력 :{currentAttack}, 치명타 확률 :{currentCritical}");
+        Debug.Log($"강화 비용 : {cost}");
     }
 
     private int GetEnhanceCost(int nextLevel)
@@ -61,7 +60,7 @@ public class Weapon : MonoBehaviour
         int weaponIndex = level / 6;
         int baseGold = statData.GetBaseGold(weaponIndex);
 
-        return (baseGold / 20) * 15 * nextLevel;     // ���̽���� / 20 * 15
+        return (baseGold / 20) * 15 * nextLevel;     // 베이스골드 / 20 * 15
     }
 
     public void UpdateEnhanceCost()
@@ -74,10 +73,10 @@ public class Weapon : MonoBehaviour
 
         enhanceCostText.text = $"{cost}";
 
-        if (playerGold.Gold < cost)
-            enhanceCostText.color = Color.red;
+        if (GameManager.Instance.playerGold.Gold < cost)
+            enhanceCostText.color = Color.red;      // 강화 불가 : 빨간색
         else
-            enhanceCostText.color = Color.yellow;
+            enhanceCostText.color = Color.yellow;   // 강화 가능 : 노란색
     }
 
 
@@ -90,8 +89,8 @@ public class Weapon : MonoBehaviour
 
         if (baseStat != null)
         {
-            currentAttack = baseStat.baseAttackPower + enhanceStep; // ��ȭ�ܰ躰 1������
-            currentCritical = baseStat.baseCriticalRate + (0.05f * enhanceStep);    // 0.05�� ����
+            currentAttack = baseStat.baseAttackPower + enhanceStep;
+            currentCritical = baseStat.baseCriticalRate + (0.05f * enhanceStep);
         }
         else
         {
@@ -106,31 +105,26 @@ public class Weapon : MonoBehaviour
         int spriteIndex = level / 6;
 
         for (int i = 0; i < levelTexts.Length; i++)
-            levelTexts[i].SetActive(i == enhanceStep);   // �ؽ�Ʈ �ݺ��ǰ�
+            levelTexts[i].SetActive(i == enhanceStep);   // 강화 단계마다 텍스트 바뀌게
 
         if (weaponNameText != null && statData != null)
-            weaponNameText.text = statData.GetWeaponName(level);    // ���� �̸�
+            weaponNameText.text = statData.GetWeaponName(level);    // 무기 이름
 
         if (weaponMainNameText != null && statData != null)
             weaponMainNameText.text = statData.GetWeaponName(level);
 
         if (weaponImage != null && weaponSprites != null && weaponSprites.Length > spriteIndex)
         {
-            weaponImage.sprite = weaponSprites[spriteIndex];       // ���� �̹���(��������Ʈ)
+            weaponImage.sprite = weaponSprites[spriteIndex];       // 무기 이미지(스프라이트)
         }
         
         CalculateStats();
 
-        //if (statData != null)
-        //    //currentStat = statData.GetEnhanceLevel(level);     // ���� ���� ��������
-        //else
-        //    currentStat = new EnhanceLevel();
-
 
         if (attackText != null)
-            attackText.text = "���ݷ� : " + currentAttack.ToString();
+            attackText.text = "공격력 : " + currentAttack.ToString();
         if (criticalText != null)
-            criticalText.text = "ġ��Ÿ : " + currentCritical.ToString("F2");      // �Ҽ������� �ٲ���
+            criticalText.text = "치명타확률 : " + currentCritical.ToString("F2");
 
         UpdateEnhanceCost();
 
