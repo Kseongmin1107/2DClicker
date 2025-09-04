@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Enemy : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class Enemy : MonoBehaviour
     private static readonly int HashDead = Animator.StringToHash("IsDead");
 
     private bool isDying;
+    private double rewardGold;
+
+    public event Action<Enemy> OnDied;
 
     private void Start()
     {
@@ -65,10 +69,15 @@ public class Enemy : MonoBehaviour
         if (isDying)return;
         isDying = true;
         animator.SetBool(HashDead, true);
+        GameManager.Instance.playerGold.AddGold(rewardGold);
+        OnDied?.Invoke(this);
+        gameObject.SetActive(false);
     }
-    public void Init()
+    public void Init(float maxHP, double reward)
     {
+        Fullhealth = maxHP;
         Nowhealth = Fullhealth;
+        rewardGold = reward;
         if (back) back.fillAmount = 1f;
     }
 
@@ -78,6 +87,5 @@ public class Enemy : MonoBehaviour
         isDying = false;              // �� ������ �κ�: ���������� false�� �ʱ�ȭ
         animator.ResetTrigger(HashHit);
         animator.SetBool(HashDead,false);
-
     }
 }

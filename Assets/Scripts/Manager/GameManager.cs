@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
         Load();
 
-        //Å×½ºÆ®¿ë°ñµå 1000³ÖÀ½
+        //ï¿½×½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ 1000ï¿½ï¿½ï¿½ï¿½
         if (playergold.Gold == -1)
         {
             playerGold.SetGold(1000);
@@ -52,12 +52,12 @@ public class GameManager : MonoBehaviour
 
 
     // Save and Load
-    void Save()
+    public void Save()
     {
-        // Á÷·ÄÈ­
+        // ï¿½ï¿½ï¿½ï¿½È­
         var saveData = JsonUtility.ToJson(playerData);
 
-        //ÀúÀå
+        //ï¿½ï¿½ï¿½ï¿½
         File.WriteAllText(Application.persistentDataPath + "/PlayerData.txt", saveData);
 
         Debug.Log(Application.persistentDataPath);
@@ -67,10 +67,10 @@ public class GameManager : MonoBehaviour
     void Load()
     {
         if (File.Exists(Application.persistentDataPath + "/PlayerData.txt"))
-        {//ºÒ·¯¿À±â
+        {//ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
             var loadData = File.ReadAllText(Application.persistentDataPath + "/PlayerData.txt");
 
-            //¿ªÁ÷·ÄÈ­
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È­
             playerData = JsonUtility.FromJson<PlayerData>(loadData);
         }
         else
