@@ -14,14 +14,14 @@ public class Weapon : MonoBehaviour
     public Image weaponImage;
     [SerializeField] private Sprite[] weaponSprites;
 
-    [SerializeField] private Text attackText;   // 스탯 연결
+    [SerializeField] private Text attackText;   // 스탯텍스트 연결
     [SerializeField] private Text criticalText;
 
     public int level = 0;
     private int currentAttack;
     private float currentCritical;
 
-
+    public PlayerGold playerGold;   // 골드 연결
 
     private void Start()
     {
@@ -47,10 +47,11 @@ public class Weapon : MonoBehaviour
         //gold -= cost;
     }
 
-    //private int GetEnhanceCost(int nextLevel)
-    //{
-    //    return nextLevel * 200;     // 강화비용 갈수록 증가
-    //}
+    private int GetEnhanceCost(int nextLevel)
+    {
+        if (statData == null) return 0;
+        return (statData.baseGold / 20) * 15 * nextLevel;     // 베이스골드 /20 * 15
+    }
 
     private void CalculateStats()
     {

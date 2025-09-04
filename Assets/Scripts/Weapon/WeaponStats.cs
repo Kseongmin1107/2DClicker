@@ -9,6 +9,7 @@ public class WeaponStats : ScriptableObject
     public string[] weaponName;
     //public EnhanceLevel[] stats;    // ∞≠»≠∫∞ Ω∫≈»
     public EnhanceLevel[] baseStats;
+    public int baseGold;
 
     public string GetWeaponName(int level)
     {
