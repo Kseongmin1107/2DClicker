@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 0}
   bgm: {fileID: 0}
-  enemyPrefab: {fileID: 0}
-  goldPerEnemy: 0
-  enemyMaxHP: 0
+  enemyPrefab: {fileID: 5670263267322973480, guid: 7b9b98d09977c2845bce7ff98198665e, type: 3}
+  goldPerEnemy: 700
+  enemyMaxHP: 1956
   openCondition:
-    requiredWeaponIndex: 0
-    requiredLevel: 5
-    goldCost: 0
+    requiredWeaponIndex: 102
+    goldCost: 79800
