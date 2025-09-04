@@ -9,3 +9,4 @@ public class DestroyOnDeath : StateMachineBehaviour
 
     }
 }
+
