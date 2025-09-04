@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private PlayerGold playergold = new PlayerGold();
     public StageManager StageManager;
 
+    public float baseCritDamage = 1.5f;
+
     public event Action<double> OnGoldChanged;
 
     public PlayerData Player
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if( Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -75,7 +77,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            playerData  = new PlayerData();
+            playerData = new PlayerData();
         }
     }
 
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour
     // Game Reset
     public void ResetToDefaults()
     {
-        if(File.Exists(Application.persistentDataPath + "/PlayerData.txt"))
+        if (File.Exists(Application.persistentDataPath + "/PlayerData.txt"))
         {
             File.Delete(Application.persistentDataPath + "/PlayerData.txt");
         }

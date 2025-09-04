@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
 
     public float Fullhealth = 100.0f;//���߿� �����Ӻ��� �ٸ� ü���� ���� �� �ֵ��� ����
     public float Nowhealth = 100.0f;//�������� ������ �� ���� �ִ� ü�°� ���� �����ϰ� �ٲ�
-    public float Hitdamage = 5; //�� ���� ���߿� ���ݷ��� �޾ƿ��°ɷ� ��ü
     public int score = 3;
 
 
@@ -25,18 +24,30 @@ public class Enemy : MonoBehaviour
 
     public event Action<Enemy> OnDied;
 
-
+    // ���߰�: ���� �����ǰų� SetActive(true) �� �� �ڵ� �ʱ�ȭ
     private void OnEnable()
     {
-        ResetForSpawn();  
+        ResetForSpawn();   // �� ������ �� �׻� ȣ���
     }
 
-    public void IsDamaged()
+    public void Update() // Ŭ�� �̺�Ʈ���� ��ä�� ������ �ӽ� �׽�Ʈ��
+
+    {
+        if (isDying)return;
+
+
+    
+    }
+    public void TakeDamage(float damage)
     {
         if (isDying) return;
-        Nowhealth = Nowhealth - Hitdamage;
+
+        Nowhealth = Nowhealth - damage;
+
         if (Nowhealth > 0)
         {
+            float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
+            if (back) back.fillAmount = ratio;
             animator.SetTrigger(HashHit);
         }
         else
@@ -44,24 +55,6 @@ public class Enemy : MonoBehaviour
             Nowhealth = 0f;
             IsDie();
         }
-        float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
-        if (HpbarCo != null)
-        {
-            StopCoroutine(HpbarCo);
-        }
-        HpbarCo = StartCoroutine(SetHpbar(ratio));
-    }
-
-    private Coroutine HpbarCo;
-    IEnumerator SetHpbar(float ratio)
-    {
-        while (back.fillAmount <= ratio)
-        {
-            back.fillAmount -= 0.1f*Time.deltaTime;
-            yield return null;
-        }
-        back.fillAmount = ratio;
-    
     }
 
     public void IsDie()
