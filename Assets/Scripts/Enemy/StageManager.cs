@@ -18,8 +18,10 @@ public class StageManager : MonoBehaviour
     public Image mapImage;
     public AudioSource bgmSource;
 
-    Vector3 SpawnPos => spawnPoint.position;
-    Quaternion spawnRot => spawnPoint.rotation;
+    Vector3 SpawnPos => spawnPoint ? spawnPoint.position : Vector3.zero;
+    Quaternion SpawnRot => spawnPoint ? spawnPoint.rotation : Quaternion.identity;
+
+
 
     private void Start()
     {
@@ -122,7 +124,7 @@ public class StageManager : MonoBehaviour
     public void SpawnEnemy(StageData data)
     {
       
-        CurrentEnemy = Instantiate(stages[currentStageIndex-1].enemyPrefab, SpawnPos, spawnRot);
+        CurrentEnemy = Instantiate(stages[currentStageIndex-1].enemyPrefab, SpawnPos, SpawnRot);
         CurrentEnemy.Init(data.enemyMaxHP,data.goldPerEnemy);
 
         CurrentEnemy.OnDied += HandleEnemyDied;
@@ -131,7 +133,7 @@ public class StageManager : MonoBehaviour
 
     private void HandleEnemyDied(Enemy ene)
     {
-        ene.transform.SetPositionAndRotation(SpawnPos, spawnRot);
+        ene.transform.SetPositionAndRotation(SpawnPos, SpawnRot);
         ene.Init(current.enemyMaxHP, current.goldPerEnemy);
         ene.gameObject.SetActive(true);
     }
