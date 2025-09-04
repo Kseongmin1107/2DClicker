@@ -24,6 +24,8 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private Text enhanceCostText;  // 강화비용 텍스트
 
+    public WeaponCollection weaponCollection;
+
 
     private void Start()
     {
@@ -127,6 +129,11 @@ public class Weapon : MonoBehaviour
             criticalText.text = "치명타확률 : " + currentCritical.ToString("F2");
 
         UpdateEnhanceCost();
+
+        if (weaponCollection != null)
+        {
+            weaponCollection.UpdateCollection(spriteIndex);
+        }
 
     }
 
