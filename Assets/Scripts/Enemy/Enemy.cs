@@ -104,8 +104,8 @@ public class Enemy : MonoBehaviour
         isDying = true;
         animator.SetBool(HashDead, true);
         GameManager.Instance.playerGold.AddGold(rewardGold);
-        OnDied?.Invoke(this);
         gameObject.SetActive(false);
+        OnDied?.Invoke(this);
     }
     public void Init(float maxHP, double reward)
     {
