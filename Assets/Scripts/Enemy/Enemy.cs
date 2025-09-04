@@ -25,45 +25,45 @@ public class Enemy : MonoBehaviour
 
     public event Action<Enemy> OnDied;
 
-    private void Start()
-    {
 
-    }
-
-    // ���߰�: ���� �����ǰų� SetActive(true) �� �� �ڵ� �ʱ�ȭ
     private void OnEnable()
     {
-        ResetForSpawn();   // �� ������ �� �׻� ȣ���
+        ResetForSpawn();  
     }
 
-    public void Update() // Ŭ�� �̺�Ʈ���� ��ä�� ������ �ӽ� �׽�Ʈ��
-
-    {
-        if (isDying)return;
-
-
-    
-    }
     public void IsDamaged()
     {
         if (isDying) return;
         Nowhealth = Nowhealth - Hitdamage;
         if (Nowhealth > 0)
         {
-
-            //front.localScale = new Vector3(Nowhealth / Fullhealth, 1.0f);
-            float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
-            if (back) back.fillAmount = ratio;              // �� fillAmount�� �ݿ�
             animator.SetTrigger(HashHit);
         }
         else
         {
-            //front.localScale = new Vector3(0.0f, 1.0f);//�� ���Ʈ�� ��ü
             Nowhealth = 0f;
             IsDie();
         }
-        
+        float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
+        if (HpbarCo != null)
+        {
+            StopCoroutine(HpbarCo);
+        }
+        HpbarCo = StartCoroutine(SetHpbar(ratio));
     }
+
+    private Coroutine HpbarCo;
+    IEnumerator SetHpbar(float ratio)
+    {
+        while (back.fillAmount <= ratio)
+        {
+            back.fillAmount -= 0.1f*Time.deltaTime;
+            yield return null;
+        }
+        back.fillAmount = ratio;
+    
+    }
+
     public void IsDie()
     {
         if (isDying)return;
