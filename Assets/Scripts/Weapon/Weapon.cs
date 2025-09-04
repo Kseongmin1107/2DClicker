@@ -18,7 +18,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Text criticalText;
 
     public int level = 0;
-    private EnhanceLevel currentStat;
+    private int currentAttack;
+    private float currentCritical;
 
 
 
@@ -34,7 +35,7 @@ public class Weapon : MonoBehaviour
             UpdateEnhanceUI();
 
             Debug.Log($"+{level}강");
-            Debug.Log($"공격력:{currentStat.attackPower}, 치명타:{currentStat.criticalRate}");
+            Debug.Log($"공격력:{currentAttack}, 치명타:{currentCritical}");
 
         //int cost = GetEnhanceCost(level + 1);
         //if (gold < cost)
@@ -44,8 +45,6 @@ public class Weapon : MonoBehaviour
         //}
         
         //gold -= cost;
-
-
     }
 
     //private int GetEnhanceCost(int nextLevel)
@@ -53,13 +52,32 @@ public class Weapon : MonoBehaviour
     //    return nextLevel * 200;     // 강화비용 갈수록 증가
     //}
 
+    private void CalculateStats()
+    {
+        int weaponIndex = level / 6;
+        int enhanceStep = level % 6;
+
+        EnhanceLevel baseStat = statData.GetBaseStats(weaponIndex);
+
+        if (baseStat != null)
+        {
+            currentAttack = baseStat.baseAttackPower + enhanceStep; // 강화단계별 1씩증가
+            currentCritical = baseStat.baseCriticalRate + (0.05f * enhanceStep);    // 0.05씩 증가
+        }
+        else
+        {
+            currentAttack = 0;
+            currentCritical = 0;
+        }
+    }
+
     public void UpdateEnhanceUI()
     {
-        int localLevel = level % 6;
+        int enhanceStep = level % 6;
         int spriteIndex = level / 6;
 
         for (int i = 0; i < levelTexts.Length; i++)
-            levelTexts[i].SetActive(i == localLevel);   // 텍스트 반복되게
+            levelTexts[i].SetActive(i == enhanceStep);   // 텍스트 반복되게
 
         if (weaponNameText != null && statData != null)
             weaponNameText.text = statData.GetWeaponName(level);    // 무기 이름
@@ -71,17 +89,19 @@ public class Weapon : MonoBehaviour
         {
             weaponImage.sprite = weaponSprites[spriteIndex];       // 무기 이미지(스프라이트)
         }
+        
+        CalculateStats();
 
-        if (statData != null)
-            currentStat = statData.GetEnhanceLevel(level);     // 현재 스탯 가져오기
-        else
-            currentStat = new EnhanceLevel();
+        //if (statData != null)
+        //    //currentStat = statData.GetEnhanceLevel(level);     // 현재 스탯 가져오기
+        //else
+        //    currentStat = new EnhanceLevel();
 
 
         if (attackText != null)
-            attackText.text = "공격력 : " + currentStat.attackPower.ToString();
+            attackText.text = "공격력 : " + currentAttack.ToString();
         if (criticalText != null)
-            criticalText.text = "치명타 : " + currentStat.criticalRate.ToString("F2");      // 소수점으로 바꾸자
+            criticalText.text = "치명타 : " + currentCritical.ToString("F2");      // 소수점으로 바꾸자
 
     }
 }

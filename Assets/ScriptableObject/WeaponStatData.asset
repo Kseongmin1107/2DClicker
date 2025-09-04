@@ -43,124 +43,64 @@ MonoBehaviour:
   - "\uC874\uC7AC\uB97C \uC9C0\uC6B0\uB294 \uAC80"
   - "\uADF8\uB798\uBE44\uD2F0\uBE14\uB808\uC774\uB4DC"
   - "\uB9C8\uAC80"
-  stats:
-  - level: 0
-    attackPower: 1
-    criticalRate: 0.1
-    attackSpeed: 1
-  - level: 1
-    attackPower: 2
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 2
-    attackPower: 3
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 3
-    attackPower: 4
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 4
-    attackPower: 5
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 5
-    attackPower: 6
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 6
-    attackPower: 7
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 7
-    attackPower: 8
-    criticalRate: 2
-    attackSpeed: 1
-  - level: 8
-    attackPower: 9
-    criticalRate: 2
-    attackSpeed: 1
-  - level: 0
-    attackPower: 1
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 0
-    attackPower: 1
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 0
-    attackPower: 1
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 0
-    attackPower: 1
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 0
-    attackPower: 1
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 0
-    attackPower: 1
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 0
-    attackPower: 1
-    criticalRate: 1
-    attackSpeed: 1
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
-  - level: 0
-    attackPower: 15
-    criticalRate: 10
-    attackSpeed: 3
+  baseStats:
+  - baseAttackPower: 3
+    baseCriticalRate: 0.75
+  - baseAttackPower: 10
+    baseCriticalRate: 1.5
+  - baseAttackPower: 20
+    baseCriticalRate: 2.25
+  - baseAttackPower: 30
+    baseCriticalRate: 3
+  - baseAttackPower: 40
+    baseCriticalRate: 3.75
+  - baseAttackPower: 50
+    baseCriticalRate: 4.5
+  - baseAttackPower: 60
+    baseCriticalRate: 5.25
+  - baseAttackPower: 70
+    baseCriticalRate: 6
+  - baseAttackPower: 80
+    baseCriticalRate: 6.75
+  - baseAttackPower: 90
+    baseCriticalRate: 7.5
+  - baseAttackPower: 100
+    baseCriticalRate: 8.25
+  - baseAttackPower: 110
+    baseCriticalRate: 9
+  - baseAttackPower: 120
+    baseCriticalRate: 9.75
+  - baseAttackPower: 130
+    baseCriticalRate: 10.5
+  - baseAttackPower: 140
+    baseCriticalRate: 11.25
+  - baseAttackPower: 150
+    baseCriticalRate: 12
+  - baseAttackPower: 160
+    baseCriticalRate: 12.75
+  - baseAttackPower: 170
+    baseCriticalRate: 13.5
+  - baseAttackPower: 180
+    baseCriticalRate: 14.25
+  - baseAttackPower: 190
+    baseCriticalRate: 15
+  - baseAttackPower: 200
+    baseCriticalRate: 15.75
+  - baseAttackPower: 210
+    baseCriticalRate: 16.5
+  - baseAttackPower: 220
+    baseCriticalRate: 17.25
+  - baseAttackPower: 230
+    baseCriticalRate: 18
+  - baseAttackPower: 240
+    baseCriticalRate: 18.75
+  - baseAttackPower: 250
+    baseCriticalRate: 19.5
+  - baseAttackPower: 260
+    baseCriticalRate: 20.25
+  - baseAttackPower: 270
+    baseCriticalRate: 21
+  - baseAttackPower: 280
+    baseCriticalRate: 21.75
+  - baseAttackPower: 290
+    baseCriticalRate: 22.5
