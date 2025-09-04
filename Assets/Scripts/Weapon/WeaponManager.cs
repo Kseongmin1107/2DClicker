@@ -7,10 +7,11 @@ public class WeaponManager : MonoBehaviour
     public List<GameObject> weaponPrefabs;
     public List<WeaponStats> weaponStats;
 
-    public Transform inventorySlot;     // 슬롯에 무기프리팹이 나타나게 위치설정
     public Transform enhanceSlot;
+    public Transform mainSlot;
 
     private GameObject currentWeapon;
+    private GameObject currentMainWeapon;
 
     public static WeaponManager Instance;
 
@@ -28,6 +29,8 @@ public class WeaponManager : MonoBehaviour
     {
         if (currentWeapon != null)
             Destroy(currentWeapon);
+        if (currentMainWeapon != null)
+            Destroy(currentMainWeapon);
 
         if (index < weaponPrefabs.Count)
         {
@@ -36,6 +39,10 @@ public class WeaponManager : MonoBehaviour
             currentWeapon.transform.localScale = Vector3.one;
 
             Weapon weaponScript = currentWeapon.GetComponent<Weapon>();
+
+            currentMainWeapon = Instantiate(weaponPrefabs[index], mainSlot); // 메인화면에 무기도 생성
+            currentMainWeapon.transform.localPosition = Vector3.zero;
+            currentMainWeapon.transform.localScale = Vector3.one;
         }
     }
 
@@ -44,10 +51,19 @@ public class WeaponManager : MonoBehaviour
         Weapon currentWeapon = GetCurrentWeapon();
         if (currentWeapon != null)
             currentWeapon.Enhance();
+
+        Weapon currentMainWeapon = GetCurrentMainWeapon();
+        if (currentMainWeapon != null)
+            currentMainWeapon.Enhance();
     }
 
     public Weapon GetCurrentWeapon()    // 현재 무기 반환
     {
-        return currentWeapon != null ? currentWeapon.GetComponent<Weapon>() : null; // 여기 다시 해보기
+        return currentWeapon != null ? currentWeapon.GetComponent<Weapon>() : null;
+    }
+
+    public Weapon GetCurrentMainWeapon()
+    {
+        return currentMainWeapon != null ? currentMainWeapon.GetComponent<Weapon>() : null;
     }
 }

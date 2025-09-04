@@ -9,15 +9,19 @@ public class Weapon : MonoBehaviour
     //[SerializeField] private int gold = 1000;
 
     [SerializeField] private Text weaponNameText;
+    [SerializeField] private Text weaponMainNameText;
     [SerializeField] private GameObject[] levelTexts;
     public Image weaponImage;
     [SerializeField] private Sprite[] weaponSprites;
 
-    [SerializeField] private Text attackText;   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Text attackText;   // ½ºÅÈÅØ½ºÆ® ¿¬°á
     [SerializeField] private Text criticalText;
 
     public int level = 0;
-    private EnhanceLevel currentStat;
+    private int currentAttack;
+    private float currentCritical;
+
+    public PlayerGold playerGold;   // °ñµå ¿¬°á
 
     private void Start()
     {
@@ -30,52 +34,75 @@ public class Weapon : MonoBehaviour
             level++;
             UpdateEnhanceUI();
 
-            Debug.Log($"+{level}ï¿½ï¿½");
-            Debug.Log($"ï¿½ï¿½ï¿½Ý·ï¿½:{currentStat.attackPower}, Ä¡ï¿½ï¿½Å¸:{currentStat.criticalRate}");
+            Debug.Log($"+{level}°­");
+            Debug.Log($"°ø°Ý·Â:{currentAttack}, Ä¡¸íÅ¸:{currentCritical}");
 
         //int cost = GetEnhanceCost(level + 1);
         //if (gold < cost)
         //{
-        //    Debug.Log("ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½");
+        //    Debug.Log("°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù");
         //    return;
         //}
         
         //gold -= cost;
-
-
     }
 
-    //private int GetEnhanceCost(int nextLevel)
-    //{
-    //    return nextLevel * 200;     // ï¿½ï¿½È­ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-    //}
+    private int GetEnhanceCost(int nextLevel)
+    {
+        if (statData == null) return 0;
+        return (statData.baseGold / 20) * 15 * nextLevel;     // º£ÀÌ½º°ñµå /20 * 15
+    }
+
+    private void CalculateStats()
+    {
+        int weaponIndex = level / 6;
+        int enhanceStep = level % 6;
+
+        EnhanceLevel baseStat = statData.GetBaseStats(weaponIndex);
+
+        if (baseStat != null)
+        {
+            currentAttack = baseStat.baseAttackPower + enhanceStep; // °­È­´Ü°èº° 1¾¿Áõ°¡
+            currentCritical = baseStat.baseCriticalRate + (0.05f * enhanceStep);    // 0.05¾¿ Áõ°¡
+        }
+        else
+        {
+            currentAttack = 0;
+            currentCritical = 0;
+        }
+    }
 
     public void UpdateEnhanceUI()
     {
-        int localLevel = level % 6;
+        int enhanceStep = level % 6;
         int spriteIndex = level / 6;
 
         for (int i = 0; i < levelTexts.Length; i++)
-            levelTexts[i].SetActive(i == localLevel);   // ï¿½Ø½ï¿½Æ® ï¿½Ýºï¿½ï¿½Ç°ï¿½
+            levelTexts[i].SetActive(i == enhanceStep);   // ÅØ½ºÆ® ¹Ýº¹µÇ°Ô
 
         if (weaponNameText != null && statData != null)
-            weaponNameText.text = statData.GetWeaponName(level);    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
+            weaponNameText.text = statData.GetWeaponName(level);    // ¹«±â ÀÌ¸§
+
+        if (weaponMainNameText != null && statData != null)
+            weaponMainNameText.text = statData.GetWeaponName(level);
 
         if (weaponImage != null && weaponSprites != null && weaponSprites.Length > spriteIndex)
         {
-            weaponImage.sprite = weaponSprites[spriteIndex];       // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®)
+            weaponImage.sprite = weaponSprites[spriteIndex];       // ¹«±â ÀÌ¹ÌÁö(½ºÇÁ¶óÀÌÆ®)
         }
+        
+        CalculateStats();
 
-        if (statData != null)
-            currentStat = statData.GetEnhanceLevel(level);     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        else
-            currentStat = new EnhanceLevel();
+        //if (statData != null)
+        //    //currentStat = statData.GetEnhanceLevel(level);     // ÇöÀç ½ºÅÈ °¡Á®¿À±â
+        //else
+        //    currentStat = new EnhanceLevel();
 
 
         if (attackText != null)
-            attackText.text = "ï¿½ï¿½ï¿½Ý·ï¿½ : " + currentStat.attackPower.ToString();
+            attackText.text = "°ø°Ý·Â : " + currentAttack.ToString();
         if (criticalText != null)
-            criticalText.text = "Ä¡ï¿½ï¿½Å¸ : " + currentStat.criticalRate.ToString("F2");      // ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½
+            criticalText.text = "Ä¡¸íÅ¸ : " + currentCritical.ToString("F2");      // ¼Ò¼öÁ¡À¸·Î ¹Ù²ÙÀÚ
 
     }
 }
