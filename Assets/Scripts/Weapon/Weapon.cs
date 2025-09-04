@@ -36,7 +36,7 @@ public class Weapon : MonoBehaviour
     {
         int cost = GetEnhanceCost(level + 1);
 
-        if (playerGold == null || !playerGold.TrySpendGold(cost))
+        if (GameManager.Instance.playerGold == null || !GameManager.Instance.playerGold.TrySpendGold(cost))
         {
             Debug.Log("°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù");     // ÆË¾÷
             return;
