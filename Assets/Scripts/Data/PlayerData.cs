@@ -19,7 +19,7 @@ public class PlayerData
     public int goldBonusUpgradeLevel;
     public int autoAttackSpeedUpgradeLevel;
 
-    public int equippedWeaponLevel;
+    public int equippedWeaponLevel = 0;
 
     public List<int> unlockStages = new List<int> { 1 };
     public int lastvisitedStage = 1;

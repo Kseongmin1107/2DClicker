@@ -14,21 +14,23 @@ public class Weapon : MonoBehaviour
     public Image weaponImage;
     [SerializeField] private Sprite[] weaponSprites;
 
-    [SerializeField] private Text attackText;   // ½ºÅÈÅØ½ºÆ® ¿¬°á
+    [SerializeField] private Text attackText;   // ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private Text criticalText;
 
     public int level = 0;
     private int currentAttack;
     private float currentCritical;
 
-    public PlayerGold playerGold;   // °ñµå ¿¬°á
+    public PlayerGold playerGold;   // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    [SerializeField] private Text enhanceCostText;  // °­È­ºñ¿ëÅØ½ºÆ®
+    [SerializeField] private Text enhanceCostText;  // ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½Ø½ï¿½Æ®
 
 
     private void Start()
     {
-        level = 0;
+        
+        level = GameManager.Instance.Player.equippedWeaponLevel;
+       
         UpdateEnhanceUI();
     }
 
@@ -38,16 +40,18 @@ public class Weapon : MonoBehaviour
 
         if (playerGold == null || !playerGold.TrySpendGold(cost))
         {
-            Debug.Log("°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù");     // ÆË¾÷
+            Debug.Log("ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½");     // ï¿½Ë¾ï¿½
             return;
         }
 
         level++;
+        GameManager.Instance.Player.equippedWeaponLevel = level;
         UpdateEnhanceUI();
+        GameManager.Instance.Save();
 
-        Debug.Log($"+{level}°­");
-        Debug.Log($"°ø°Ý·Â:{currentAttack}, Ä¡¸íÅ¸:{currentCritical}");
-        Debug.Log($"°­È­ºñ¿ë {cost}");
+        Debug.Log($"+{level}ï¿½ï¿½");
+        Debug.Log($"ï¿½ï¿½ï¿½Ý·ï¿½:{currentAttack}, Ä¡ï¿½ï¿½Å¸:{currentCritical}");
+        Debug.Log($"ï¿½ï¿½È­ï¿½ï¿½ï¿½ {cost}");
     }
 
     private int GetEnhanceCost(int nextLevel)
@@ -57,7 +61,7 @@ public class Weapon : MonoBehaviour
         int weaponIndex = level / 6;
         int baseGold = statData.GetBaseGold(weaponIndex);
 
-        return (baseGold / 20) * 15 * nextLevel;     // º£ÀÌ½º°ñµå / 20 * 15
+        return (baseGold / 20) * 15 * nextLevel;     // ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ / 20 * 15
     }
 
     public void UpdateEnhanceCost()
@@ -86,8 +90,8 @@ public class Weapon : MonoBehaviour
 
         if (baseStat != null)
         {
-            currentAttack = baseStat.baseAttackPower + enhanceStep; // °­È­´Ü°èº° 1¾¿Áõ°¡
-            currentCritical = baseStat.baseCriticalRate + (0.05f * enhanceStep);    // 0.05¾¿ Áõ°¡
+            currentAttack = baseStat.baseAttackPower + enhanceStep; // ï¿½ï¿½È­ï¿½Ü°èº° 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            currentCritical = baseStat.baseCriticalRate + (0.05f * enhanceStep);    // 0.05ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
         else
         {
@@ -102,31 +106,31 @@ public class Weapon : MonoBehaviour
         int spriteIndex = level / 6;
 
         for (int i = 0; i < levelTexts.Length; i++)
-            levelTexts[i].SetActive(i == enhanceStep);   // ÅØ½ºÆ® ¹Ýº¹µÇ°Ô
+            levelTexts[i].SetActive(i == enhanceStep);   // ï¿½Ø½ï¿½Æ® ï¿½Ýºï¿½ï¿½Ç°ï¿½
 
         if (weaponNameText != null && statData != null)
-            weaponNameText.text = statData.GetWeaponName(level);    // ¹«±â ÀÌ¸§
+            weaponNameText.text = statData.GetWeaponName(level);    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
 
         if (weaponMainNameText != null && statData != null)
             weaponMainNameText.text = statData.GetWeaponName(level);
 
         if (weaponImage != null && weaponSprites != null && weaponSprites.Length > spriteIndex)
         {
-            weaponImage.sprite = weaponSprites[spriteIndex];       // ¹«±â ÀÌ¹ÌÁö(½ºÇÁ¶óÀÌÆ®)
+            weaponImage.sprite = weaponSprites[spriteIndex];       // ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®)
         }
         
         CalculateStats();
 
         //if (statData != null)
-        //    //currentStat = statData.GetEnhanceLevel(level);     // ÇöÀç ½ºÅÈ °¡Á®¿À±â
+        //    //currentStat = statData.GetEnhanceLevel(level);     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         //else
         //    currentStat = new EnhanceLevel();
 
 
         if (attackText != null)
-            attackText.text = "°ø°Ý·Â : " + currentAttack.ToString();
+            attackText.text = "ï¿½ï¿½ï¿½Ý·ï¿½ : " + currentAttack.ToString();
         if (criticalText != null)
-            criticalText.text = "Ä¡¸íÅ¸ : " + currentCritical.ToString("F2");      // ¼Ò¼öÁ¡À¸·Î ¹Ù²ÙÀÚ
+            criticalText.text = "Ä¡ï¿½ï¿½Å¸ : " + currentCritical.ToString("F2");      // ï¿½Ò¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½
 
         UpdateEnhanceCost();
 
