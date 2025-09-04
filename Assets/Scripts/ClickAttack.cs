@@ -38,33 +38,19 @@ public class ClickAttack : MonoBehaviour
 
     public void Attack(bool isAutoAttack = false)
     {
-        Vector3 attackPosition = GetAttackPosition(isAutoAttack);
-        if (attackPosition == Vector3.zero) return;
-
+        Enemy enemy = GameManager.Instance.StageManager.CurrentEnemy;
+        if (enemy == null)
+        {
+            return;
+        }
         float finalDamage = CalculateDamage();
+        enemy.TakeDamage(finalDamage);
 
-        PlayAttackEffect(attackPosition);
+        PlayAttackEffect(enemy.transform.position);
 
+        Debug.Log("공격 완료! " + (isAutoAttack ? "자동 공격" : "클릭 공격"));
     }
 
-    private Vector3 GetAttackPosition(bool isAutoAttack)
-    {
-        if (isAutoAttack)
-        {
-           Enemy enemy = GameManager.Instance.StageManager.CurrentEnemy;
-            if (enemy != null)
-            {
-                return enemy.transform.position;
-            }
-            return Vector3.zero;
-        }
-        else
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0;
-            return mousePosition;
-        }
-    }
 
     private float CalculateDamage()
     {
@@ -79,12 +65,11 @@ public class ClickAttack : MonoBehaviour
         }
 
         bool isCritical = (Random.Range(0f, 1f) < currentCriticalRate);
-
         float damage = baseAttackPower;
 
         if (isCritical)
         {
-            damage *= GameManager.Instance.Player.baseCritDamage;
+            damage *= GameManager.Instance.baseCritDamage;
             Debug.Log("치명타 발생! 데미지: " + damage);
         }
         else

@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
 
     public float Fullhealth = 100.0f;//���߿� �����Ӻ��� �ٸ� ü���� ���� �� �ֵ��� ����
     public float Nowhealth = 100.0f;//�������� ������ �� ���� �ִ� ü�°� ���� �����ϰ� �ٲ�
-    public float Hitdamage = 5; //�� ���� ���߿� ���ݷ��� �޾ƿ��°ɷ� ��ü
     public int score = 3;
 
 
@@ -24,11 +23,6 @@ public class Enemy : MonoBehaviour
     private double rewardGold;
 
     public event Action<Enemy> OnDied;
-
-    private void Start()
-    {
-
-    }
 
     // ���߰�: ���� �����ǰų� SetActive(true) �� �� �ڵ� �ʱ�ȭ
     private void OnEnable()
@@ -44,26 +38,25 @@ public class Enemy : MonoBehaviour
 
     
     }
-    public void IsDamaged()
+    public void TakeDamage(float damage)
     {
         if (isDying) return;
-        Nowhealth = Nowhealth - Hitdamage;
+
+        Nowhealth = Nowhealth - damage;
+
         if (Nowhealth > 0)
         {
-
-            //front.localScale = new Vector3(Nowhealth / Fullhealth, 1.0f);
             float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
-            if (back) back.fillAmount = ratio;              // �� fillAmount�� �ݿ�
+            if (back) back.fillAmount = ratio;
             animator.SetTrigger(HashHit);
         }
         else
         {
-            //front.localScale = new Vector3(0.0f, 1.0f);//�� ���Ʈ�� ��ü
             Nowhealth = 0f;
             IsDie();
         }
-        
     }
+
     public void IsDie()
     {
         if (isDying)return;

@@ -90,7 +90,8 @@ public class Weapon : MonoBehaviour
         if (baseStat != null)
         {
             currentAttack = baseStat.baseAttackPower + enhanceStep;
-            currentCritical = baseStat.baseCriticalRate + (0.05f * enhanceStep);
+            float calculatedCritical = baseStat.baseCriticalRate + (0.05f * enhanceStep);
+            currentCritical = Mathf.Min(calculatedCritical, 1.0f);
         }
         else
         {
