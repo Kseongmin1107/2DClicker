@@ -114,11 +114,9 @@ public class StageManager : MonoBehaviour
         {
             mapImage.sprite = data.map;
         }
-        if (bgmSource)
+        if (data.bgm)
         {
-            bgmSource.clip = data.bgm;
-            if (bgmSource.clip) bgmSource.Play();
-            else bgmSource.Stop();
+            AudioManager.Instance.FadeTo(data.bgm, 1.0f);
         }
     }
     public void SpawnEnemy(StageData data)

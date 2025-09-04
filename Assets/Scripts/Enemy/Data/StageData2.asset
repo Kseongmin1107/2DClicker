@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StageData2
   m_EditorClassIdentifier: 
   map: {fileID: 0}
-  bgm: {fileID: 0}
+  bgm: {fileID: 8300000, guid: bea93a38b71b64b598109b3a3b1a0048, type: 3}
   enemyPrefab: {fileID: 5670263267322973480, guid: 7b9b98d09977c2845bce7ff98198665e, type: 3}
   goldPerEnemy: 20
   enemyMaxHP: 78
