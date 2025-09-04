@@ -9,9 +9,9 @@ public class Enemy : MonoBehaviour
     //public RectTransform front;
     [SerializeField] private Image back;
 
-    public float Fullhealth = 100.0f;//³ªÁß¿¡ ½½¶óÀÓº°·Î ´Ù¸¥ Ã¼·ÂÀ» °¡Áú ¼ö ÀÖµµ·Ï ¸¸µë
-    public float Nowhealth = 100.0f;//½½¶óÀÓÀ» »ý¼ºÇÒ ¶§ ¸¶´Ù ÃÖ´ë Ã¼·Â°ú °°°Ô ¼³Á¤ÇÏ°Ô ¹Ù²Þ
-    public float Hitdamage = 5; //ÀÌ °ªÀº ³ªÁß¿¡ °ø°Ý·ÂÀ» ¹Þ¾Æ¿À´Â°É·Î ±³Ã¼
+    public float Fullhealth = 100.0f;//ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Óºï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float Nowhealth = 100.0f;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ Ã¼ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ù²ï¿½
+    public float Hitdamage = 5; //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½Â°É·ï¿½ ï¿½ï¿½Ã¼
     public int score = 3;
 
 
@@ -26,25 +26,19 @@ public class Enemy : MonoBehaviour
 
     }
 
-    // ¡ÚÃß°¡: »õ·Î ½ºÆùµÇ°Å³ª SetActive(true) µÉ ¶§ ÀÚµ¿ ÃÊ±âÈ­
+    // ï¿½ï¿½ï¿½ß°ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Å³ï¿½ SetActive(true) ï¿½ï¿½ ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Ê±ï¿½È­
     private void OnEnable()
     {
-        ResetForSpawn();   // ¡ç ¸®½ºÆù ½Ã Ç×»ó È£ÃâµÊ
+        ResetForSpawn();   // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×»ï¿½ È£ï¿½ï¿½ï¿½
     }
 
-    public void Update() // Å¬¸¯ ÀÌº¥Æ®¿¡¼­ ´ëÃ¤ÇÔ Áö±ÝÀº ÀÓ½Ã Å×½ºÆ®¿ë
+    public void Update() // Å¬ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½
 
     {
         if (isDying)return;
 
 
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            IsDamaged();
-            Debug.Log("¾Æ¾ß");
-
-        }
+    
     }
     public void IsDamaged()
     {
@@ -55,12 +49,12 @@ public class Enemy : MonoBehaviour
 
             //front.localScale = new Vector3(Nowhealth / Fullhealth, 1.0f);
             float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
-            if (back) back.fillAmount = ratio;              // ¡ç fillAmount·Î ¹Ý¿µ
+            if (back) back.fillAmount = ratio;              // ï¿½ï¿½ fillAmountï¿½ï¿½ ï¿½Ý¿ï¿½
             animator.SetTrigger(HashHit);
         }
         else
         {
-            //front.localScale = new Vector3(0.0f, 1.0f);//ÇÊ ¾î¸¶¿îÆ®·Î ±³Ã¼
+            //front.localScale = new Vector3(0.0f, 1.0f);//ï¿½ï¿½ ï¿½î¸¶ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ã¼
             Nowhealth = 0f;
             IsDie();
         }
@@ -78,10 +72,10 @@ public class Enemy : MonoBehaviour
         if (back) back.fillAmount = 1f;
     }
 
-    // ¡ÚÃß°¡: HP¹Ù/¾Ö´Ï¸ÞÀÌÅÍ/ÇÃ·¡±×¸¦ ¸®½ºÆù ½ÃÁ¡¿¡ ¿ø»óÅÂ·Î
+    // ï¿½ï¿½ï¿½ß°ï¿½: HPï¿½ï¿½/ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½Ã·ï¿½ï¿½×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½
     private void ResetForSpawn()
     {
-        isDying = false;              // ¡ç Áú¹®ÇÑ ºÎºÐ: ¸®½ºÆù¸¶´Ù false·Î ÃÊ±âÈ­
+        isDying = false;              // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ falseï¿½ï¿½ ï¿½Ê±ï¿½È­
         animator.ResetTrigger(HashHit);
         animator.SetBool(HashDead,false);
 

@@ -32,7 +32,7 @@ public class AutoAttack : MonoBehaviour
     {
         while (true)
         {
-            clickAttack.Attack();
+            clickAttack.Attack(true);
             Debug.Log("자동 공격중");
             yield return new WaitForSeconds(1f / autoAttackSpeed);
         }

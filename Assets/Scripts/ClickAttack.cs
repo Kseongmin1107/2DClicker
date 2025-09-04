@@ -9,7 +9,6 @@ public class ClickAttack : MonoBehaviour
 
     void Update()
     {
-        
         if (IsClicked())
         {
             TryAttack();
@@ -34,20 +33,34 @@ public class ClickAttack : MonoBehaviour
 
     private void TryAttack()
     {
-        // 일시정지 상태면 발동 X
-        //if(PopupPause == true)
-        //return;
         Attack();
     }
 
-    public void Attack()
+    public void Attack(bool isAutoAttack = false)
     {
-        Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        clickPosition.z = 0;
+        Vector3 attackPosition;
+
+        if (isAutoAttack)
+        {
+            GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
+            if (enemy != null)
+            {
+                attackPosition = enemy.transform.position;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            attackPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            attackPosition.z = 0;
+        }
 
         if (attackEffectPrefab != null)
         {
-            Instantiate(attackEffectPrefab, clickPosition, Quaternion.identity);
+            Instantiate(attackEffectPrefab, attackPosition, Quaternion.identity);
         }
         else
         {
