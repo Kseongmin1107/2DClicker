@@ -1343,7 +1343,6 @@ GameObject:
   - component: {fileID: 645419105}
   - component: {fileID: 645419107}
   - component: {fileID: 645419106}
-  - component: {fileID: 645419108}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -1408,27 +1407,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645419104}
   m_CullTransparentMesh: 1
---- !u!114 &645419108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 645419104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d57c7e4e2e47244b4bbe90c59ef9fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statData: {fileID: 0}
-  weaponNameText: {fileID: 0}
-  weaponMainNameText: {fileID: 0}
-  levelTexts: []
-  weaponImage: {fileID: 0}
-  weaponSprites: []
-  attackText: {fileID: 1784761663}
-  criticalText: {fileID: 1251717178}
-  level: 0
 --- !u!1 &695954569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1737,7 +1715,6 @@ GameObject:
   - component: {fileID: 1210493783}
   - component: {fileID: 1210493782}
   - component: {fileID: 1210493781}
-  - component: {fileID: 1210493780}
   m_Layer: 5
   m_Name: MainSlot
   m_TagString: Untagged
@@ -1745,27 +1722,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1210493780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210493779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d57c7e4e2e47244b4bbe90c59ef9fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statData: {fileID: 0}
-  weaponNameText: {fileID: 0}
-  weaponMainNameText: {fileID: 0}
-  levelTexts: []
-  weaponImage: {fileID: 0}
-  weaponSprites: []
-  attackText: {fileID: 1784761663}
-  criticalText: {fileID: 1251717178}
-  level: 0
 --- !u!114 &1210493781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2014,6 +1970,10 @@ PrefabInstance:
       propertyPath: attackSpeedText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5396593583586829522, guid: 811a1c5554d310f4cabb30b3291c806b, type: 3}
+      propertyPath: enhanceCostText
+      value: 
+      objectReference: {fileID: 1519351324}
     - target: {fileID: 5396593583586829522, guid: 811a1c5554d310f4cabb30b3291c806b, type: 3}
       propertyPath: weaponMainNameText
       value: 
