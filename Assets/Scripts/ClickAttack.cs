@@ -63,9 +63,9 @@ public class ClickAttack : MonoBehaviour
         float baseAttackPower = 0f;
 
         if (currentWeapon != null)
-        {
-            currentCriticalRate = currentWeapon.GetCriticalRate();
-            baseAttackPower = currentWeapon.GetCurrentAttackPower();
+        {//웨폰 연결 되면 주석 해제
+            //currentCriticalRate = currentWeapon.GetCriticalRate();
+            //baseAttackPower = currentWeapon.GetCurrentAttackPower();
         }
 
         bool isCritical = (Random.Range(0f, 1f) < currentCriticalRate); //예를들어서 치명타확률이 20%인데 0.15가 나오면 참으로 치명타가 발생하게됨
