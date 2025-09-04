@@ -9,7 +9,7 @@ public class WeaponStats : ScriptableObject
     public string[] weaponName;
     //public EnhanceLevel[] stats;    // ∞≠»≠∫∞ Ω∫≈»
     public EnhanceLevel[] baseStats;
-    public int baseGold;
+    public int[] baseGold;
 
     public string GetWeaponName(int level)
     {
@@ -32,5 +32,12 @@ public class WeaponStats : ScriptableObject
         if (index < 0 || index >= baseStats.Length)
             return null;
         return baseStats[index];
+    }
+
+    public int GetBaseGold(int index)
+    {
+        if (index < 0 || index >= baseGold.Length)
+            return 0;
+        return baseGold[index];
     }
 }
