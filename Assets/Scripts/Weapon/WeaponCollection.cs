@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponCollection : MonoBehaviour
 {
     public GameObject[] slotHide;
-    public Weapon weapon;
+    public GameObject[] slot;
 
     public void UpdateCollection()      // 도감업데이트
     {
