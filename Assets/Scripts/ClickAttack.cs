@@ -8,11 +8,15 @@ public class ClickAttack : MonoBehaviour
 {
     [SerializeField] private ParticleSystem attackEffect;
 
+    [SerializeField] private AudioClip attackSound;
+    private AudioSource audioSource;
+
     private PlayerControls playerControls;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -60,6 +64,11 @@ public class ClickAttack : MonoBehaviour
         else
         {
             PlayAttackEffect(GetMousePosition());
+        }
+
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound);
         }
 
         Debug.Log("공격 완료! " + (isAutoAttack ? "자동 공격" : "클릭 공격"));
