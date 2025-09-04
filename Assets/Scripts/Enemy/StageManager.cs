@@ -17,11 +17,14 @@ public class StageManager : MonoBehaviour
 
     public Image mapImage;
     public AudioSource bgmSource;
+    public SpriteRenderer fieldBackGround;
+
+
 
     Vector3 SpawnPos => spawnPoint ? spawnPoint.position : Vector3.zero;
     Quaternion SpawnRot => spawnPoint ? spawnPoint.rotation : Quaternion.identity;
 
-
+   
 
     private void Start()
     {
@@ -110,16 +113,14 @@ public class StageManager : MonoBehaviour
 
     private void ApplyMapAndBgm(StageData data)
     {
-        if (mapImage)
+        if (data.map)
         {
-            mapImage.sprite = data.map;
+            fieldBackGround.sprite = data.map;
         }
-        if (bgmSource)
-        {
-            bgmSource.clip = data.bgm;
-            if (bgmSource.clip) bgmSource.Play();
-            else bgmSource.Stop();
-        }
+        //if (data.bgm)
+        //{
+        //    AudioManager.Instance.FadeTo(data.bgm, 1.0f);
+        //}
     }
     public void SpawnEnemy(StageData data)
     {

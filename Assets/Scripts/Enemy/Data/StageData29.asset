@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587983c469d224bdd8c4e066c3a4d069, type: 3}
   m_Name: StageData29
   m_EditorClassIdentifier: 
-  map: {fileID: 0}
-  bgm: {fileID: 0}
+  map: {fileID: 117730692, guid: 367fef7c7a0cf8b4e8fc2020259965e9, type: 3}
+  bgm: {fileID: 8300000, guid: 98b7a62b9155fc8409e7aeb055c90a9f, type: 3}
   enemyPrefab: {fileID: 5670263267322973480, guid: 7b9b98d09977c2845bce7ff98198665e, type: 3}
   goldPerEnemy: 2000
   enemyMaxHP: 5377
