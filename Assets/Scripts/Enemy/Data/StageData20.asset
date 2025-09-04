@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 587983c469d224bdd8c4e066c3a4d069, type: 3}
-  m_Name: StageData29
+  m_Name: StageData20
   m_EditorClassIdentifier: 
   map: {fileID: 0}
   bgm: {fileID: 0}
   enemyPrefab: {fileID: 5670263267322973480, guid: 7b9b98d09977c2845bce7ff98198665e, type: 3}
-  goldPerEnemy: 2000
-  enemyMaxHP: 5377
+  goldPerEnemy: 1000
+  enemyMaxHP: 2316
   openCondition:
-    requiredWeaponIndex: 174
-    goldCost: 834000
+    requiredWeaponIndex: 120
+    goldCost: 150000

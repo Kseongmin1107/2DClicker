@@ -24,6 +24,8 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         currentStageIndex = Mathf.Clamp(GameManager.Instance.Player.lastvisitedStage, 1, 30);
+        OpenOrGo(currentStageIndex);
+
     }
 
     public void OpenOrGo(int index)
@@ -97,10 +99,6 @@ public class StageManager : MonoBehaviour
     {
         var w = WeaponManager.Instance.GetCurrentWeapon();
         if (cond.requiredWeaponIndex >= 0 && GameManager.Instance.Player.equippedWeaponLevel != cond.requiredWeaponIndex)
-        {
-            return false;
-        }
-        if (w.level < cond.requiredLevel)
         {
             return false;
         }
