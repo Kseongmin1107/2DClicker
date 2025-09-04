@@ -25,6 +25,7 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private Text enhanceCostText;  // 강화비용텍스트
 
+
     private void Start()
     {
         level = 0;
@@ -68,6 +69,11 @@ public class Weapon : MonoBehaviour
         int cost = GetEnhanceCost(nextlevel);
 
         enhanceCostText.text = $"{cost}";
+
+        if (playerGold.Gold < cost)
+            enhanceCostText.color = Color.red;
+        else
+            enhanceCostText.color = Color.yellow;
     }
 
 
