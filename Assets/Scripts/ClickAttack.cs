@@ -36,6 +36,13 @@ public class ClickAttack : MonoBehaviour
         Attack();
     }
 
+    private Vector3 GetMousePosition()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = Camera.main.nearClipPlane;
+        return Camera.main.ScreenToWorldPoint(mousePosition);
+    }
+
     public void Attack(bool isAutoAttack = false)
     {
         Enemy enemy = GameManager.Instance.StageManager.CurrentEnemy;
@@ -46,11 +53,17 @@ public class ClickAttack : MonoBehaviour
         float finalDamage = CalculateDamage();
         enemy.TakeDamage(finalDamage);
 
-        PlayAttackEffect(enemy.transform.position);
+        if (isAutoAttack)
+        {
+            PlayAttackEffect(enemy.transform.position);
+        }
+        else
+        {
+            PlayAttackEffect(GetMousePosition());
+        }
 
         Debug.Log("공격 완료! " + (isAutoAttack ? "자동 공격" : "클릭 공격"));
     }
-
 
     private float CalculateDamage()
     {
