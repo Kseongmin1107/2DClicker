@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ClickAttack : MonoBehaviour
 {
-    [SerializeField] private GameObject attackEffectPrefab;
+    [SerializeField] private ParticleSystem attackEffect;
 
     void Update()
     {
@@ -82,14 +82,14 @@ public class ClickAttack : MonoBehaviour
         {
             Debug.Log("일반 공격. 데미지: " + damage);
         }
-
-        if (attackEffectPrefab != null)
+        if (attackEffect != null)
         {
-            Instantiate(attackEffectPrefab, attackPosition, Quaternion.identity);
+            attackEffect.transform.position = attackPosition;
+            attackEffect.Play();
         }
         else
         {
-            Debug.LogWarning("Attack Effect Prefab이 할당되지 않았습니다.");
+            Debug.LogWarning("Attack Effect가 할당되지 않았습니다.");
         }
     }
 }
