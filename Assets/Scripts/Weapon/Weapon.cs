@@ -9,73 +9,140 @@ public class Weapon : MonoBehaviour
     //[SerializeField] private int gold = 1000;
 
     [SerializeField] private Text weaponNameText;
+    [SerializeField] private Text weaponMainNameText;
     [SerializeField] private GameObject[] levelTexts;
     public Image weaponImage;
     [SerializeField] private Sprite[] weaponSprites;
 
-    [SerializeField] private Text attackText;   // ���� ����
+    [SerializeField] private Text attackText;   // �����ؽ�Ʈ ����
     [SerializeField] private Text criticalText;
 
     public int level = 0;
-    private EnhanceLevel currentStat;
+    private int currentAttack;
+    private float currentCritical;
+
+    public PlayerGold playerGold;   // ��� ����
+
+    [SerializeField] private Text enhanceCostText;  // ��ȭ����ؽ�Ʈ
+
 
     private void Start()
     {
-        level = 0;
+        
+        level = GameManager.Instance.Player.equippedWeaponLevel;
+       
         UpdateEnhanceUI();
     }
 
     public void Enhance()
     {
-            level++;
-            UpdateEnhanceUI();
+        int cost = GetEnhanceCost(level + 1);
 
-            Debug.Log($"+{level}��");
-            Debug.Log($"���ݷ�:{currentStat.attackPower}, ġ��Ÿ:{currentStat.criticalRate}");
+        if (playerGold == null || !playerGold.TrySpendGold(cost))
+        {
+            Debug.Log("��尡 �����մϴ�");     // �˾�
+            return;
+        }
 
-        //int cost = GetEnhanceCost(level + 1);
-        //if (gold < cost)
-        //{
-        //    Debug.Log("��尡 �����մϴ�");
-        //    return;
-        //}
-        
-        //gold -= cost;
+        level++;
+        GameManager.Instance.Player.equippedWeaponLevel = level;
+        UpdateEnhanceUI();
+        GameManager.Instance.Save();
 
-
+        Debug.Log($"+{level}��");
+        Debug.Log($"���ݷ�:{currentAttack}, ġ��Ÿ:{currentCritical}");
+        Debug.Log($"��ȭ��� {cost}");
     }
 
-    //private int GetEnhanceCost(int nextLevel)
-    //{
-    //    return nextLevel * 200;     // ��ȭ��� ������ ����
-    //}
+    private int GetEnhanceCost(int nextLevel)
+    {
+        if (statData == null) return 0;
+
+        int weaponIndex = level / 6;
+        int baseGold = statData.GetBaseGold(weaponIndex);
+
+        return (baseGold / 20) * 15 * nextLevel;     // ���̽���� / 20 * 15
+    }
+
+    public void UpdateEnhanceCost()
+    {
+        if (enhanceCostText == null)
+            return;
+
+        int nextlevel = level + 1;
+        int cost = GetEnhanceCost(nextlevel);
+
+        enhanceCostText.text = $"{cost}";
+
+        if (playerGold.Gold < cost)
+            enhanceCostText.color = Color.red;
+        else
+            enhanceCostText.color = Color.yellow;
+    }
+
+
+    private void CalculateStats()
+    {
+        int weaponIndex = level / 6;
+        int enhanceStep = level % 6;
+
+        EnhanceLevel baseStat = statData.GetBaseStats(weaponIndex);
+
+        if (baseStat != null)
+        {
+            currentAttack = baseStat.baseAttackPower + enhanceStep; // ��ȭ�ܰ躰 1������
+            currentCritical = baseStat.baseCriticalRate + (0.05f * enhanceStep);    // 0.05�� ����
+        }
+        else
+        {
+            currentAttack = 0;
+            currentCritical = 0;
+        }
+    }
 
     public void UpdateEnhanceUI()
     {
-        int localLevel = level % 6;
+        int enhanceStep = level % 6;
         int spriteIndex = level / 6;
 
         for (int i = 0; i < levelTexts.Length; i++)
-            levelTexts[i].SetActive(i == localLevel);   // �ؽ�Ʈ �ݺ��ǰ�
+            levelTexts[i].SetActive(i == enhanceStep);   // �ؽ�Ʈ �ݺ��ǰ�
 
         if (weaponNameText != null && statData != null)
             weaponNameText.text = statData.GetWeaponName(level);    // ���� �̸�
+
+        if (weaponMainNameText != null && statData != null)
+            weaponMainNameText.text = statData.GetWeaponName(level);
 
         if (weaponImage != null && weaponSprites != null && weaponSprites.Length > spriteIndex)
         {
             weaponImage.sprite = weaponSprites[spriteIndex];       // ���� �̹���(��������Ʈ)
         }
+        
+        CalculateStats();
 
-        if (statData != null)
-            currentStat = statData.GetEnhanceLevel(level);     // ���� ���� ��������
-        else
-            currentStat = new EnhanceLevel();
+        //if (statData != null)
+        //    //currentStat = statData.GetEnhanceLevel(level);     // ���� ���� ��������
+        //else
+        //    currentStat = new EnhanceLevel();
 
 
         if (attackText != null)
-            attackText.text = "���ݷ� : " + currentStat.attackPower.ToString();
+            attackText.text = "���ݷ� : " + currentAttack.ToString();
         if (criticalText != null)
-            criticalText.text = "ġ��Ÿ : " + currentStat.criticalRate.ToString("F2");      // �Ҽ������� �ٲ���
+            criticalText.text = "ġ��Ÿ : " + currentCritical.ToString("F2");      // �Ҽ������� �ٲ���
 
+        UpdateEnhanceCost();
+
+    }
+
+    public float GetCriticalRate()
+    {
+        return currentCritical;
+    }
+
+    public int GetCurrentAttackPower()
+    {
+        return currentAttack;
     }
 }

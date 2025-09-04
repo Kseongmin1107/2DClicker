@@ -5,8 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class EnhanceLevel
 {
-    public int level;
-    public int attackPower;
-    public float criticalRate;
-    public float attackSpeed;
+    public int baseAttackPower;
+    public float baseCriticalRate;
 }
