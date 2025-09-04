@@ -23,6 +23,8 @@ public class Weapon : MonoBehaviour
 
     public PlayerGold playerGold;   // 골드 연결
 
+    [SerializeField] private Text enhanceCostText;  // 강화비용텍스트
+
     private void Start()
     {
         level = 0;
@@ -31,27 +33,43 @@ public class Weapon : MonoBehaviour
 
     public void Enhance()
     {
-            level++;
-            UpdateEnhanceUI();
+        int cost = GetEnhanceCost(level + 1);
 
-            Debug.Log($"+{level}강");
-            Debug.Log($"공격력:{currentAttack}, 치명타:{currentCritical}");
+        if (playerGold == null || !playerGold.TrySpendGold(cost))
+        {
+            Debug.Log("골드가 부족합니다");     // 팝업
+            return;
+        }
 
-        //int cost = GetEnhanceCost(level + 1);
-        //if (gold < cost)
-        //{
-        //    Debug.Log("골드가 부족합니다");
-        //    return;
-        //}
-        
-        //gold -= cost;
+        level++;
+        UpdateEnhanceUI();
+
+        Debug.Log($"+{level}강");
+        Debug.Log($"공격력:{currentAttack}, 치명타:{currentCritical}");
+        Debug.Log($"강화비용 {cost}");
     }
 
     private int GetEnhanceCost(int nextLevel)
     {
         if (statData == null) return 0;
-        return (statData.baseGold / 20) * 15 * nextLevel;     // 베이스골드 /20 * 15
+
+        int weaponIndex = level / 6;
+        int baseGold = statData.GetBaseGold(weaponIndex);
+
+        return (baseGold / 20) * 15 * nextLevel;     // 베이스골드 / 20 * 15
     }
+
+    public void UpdateEnhanceCost()
+    {
+        if (enhanceCostText == null)
+            return;
+
+        int nextlevel = level + 1;
+        int cost = GetEnhanceCost(nextlevel);
+
+        enhanceCostText.text = $"{cost}";
+    }
+
 
     private void CalculateStats()
     {
@@ -104,5 +122,17 @@ public class Weapon : MonoBehaviour
         if (criticalText != null)
             criticalText.text = "치명타 : " + currentCritical.ToString("F2");      // 소수점으로 바꾸자
 
+        UpdateEnhanceCost();
+
+    }
+
+    public float GetCriticalRate()
+    {
+        return currentCritical;
+    }
+
+    public int GetCurrentAttackPower()
+    {
+        return currentAttack;
     }
 }
