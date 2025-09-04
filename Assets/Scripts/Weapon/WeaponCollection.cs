@@ -7,7 +7,7 @@ public class WeaponCollection : MonoBehaviour
     public GameObject[] slotHide;
     public Weapon weapon;
 
-    public void UpdateCollection()
+    public void UpdateCollection()      // 도감업데이트
     {
         if (weapon == null)
             return;
