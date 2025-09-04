@@ -21,7 +21,6 @@ public class Weapon : MonoBehaviour
     private int currentAttack;
     private float currentCritical;
 
-    public PlayerGold playerGold;   // ��� ����
 
     [SerializeField] private Text enhanceCostText;  // 강화비용 텍스트
 
@@ -74,7 +73,7 @@ public class Weapon : MonoBehaviour
 
         enhanceCostText.text = $"{cost}";
 
-        if (playerGold.Gold < cost)
+        if (GameManager.Instance.playerGold.Gold < cost)
             enhanceCostText.color = Color.red;      // 강화 불가 : 빨간색
         else
             enhanceCostText.color = Color.yellow;   // 강화 가능 : 노란색
