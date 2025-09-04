@@ -4,18 +4,27 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
     //public RectTransform front;
     [SerializeField] private Image back;
 
-    public float Fullhealth = 100.0f;//���߿� �����Ӻ��� �ٸ� ü���� ���� �� �ֵ��� ����
-    public float Nowhealth = 100.0f;//�������� ������ �� ���� �ִ� ü�°� ���� �����ϰ� �ٲ�
+    [SerializeField] private TextMeshProUGUI damageText;
+    private float damageLifeTime = 0.5f;
+
+    private Coroutine HpbarCo;
+    private Coroutine damageTextCo;
+
+    public float Fullhealth = 100.0f;
+    public float Nowhealth = 100.0f;
     public int score = 3;
 
 
     [SerializeField] private Animator animator;
+
+
     private static readonly int HashHit = Animator.StringToHash("Hit");
     private static readonly int HashDead = Animator.StringToHash("IsDead");
 
@@ -24,13 +33,12 @@ public class Enemy : MonoBehaviour
 
     public event Action<Enemy> OnDied;
 
-    // ���߰�: ���� �����ǰų� SetActive(true) �� �� �ڵ� �ʱ�ȭ
     private void OnEnable()
     {
-        ResetForSpawn();   // �� ������ �� �׻� ȣ���
+        ResetForSpawn();   
     }
 
-    public void Update() // Ŭ�� �̺�Ʈ���� ��ä�� ������ �ӽ� �׽�Ʈ��
+    public void Update()
 
     {
         if (isDying)return;
@@ -43,11 +51,10 @@ public class Enemy : MonoBehaviour
         if (isDying) return;
 
         Nowhealth = Nowhealth - damage;
+        ShowDamageText(damage);
 
         if (Nowhealth > 0)
         {
-            float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
-            if (back) back.fillAmount = ratio;
             animator.SetTrigger(HashHit);
         }
         else
@@ -55,7 +62,41 @@ public class Enemy : MonoBehaviour
             Nowhealth = 0f;
             IsDie();
         }
+        float ratio = Mathf.Clamp01(Nowhealth / Mathf.Max(1f, Fullhealth));
+        if (HpbarCo != null)
+        {
+            StopCoroutine(HpbarCo);
+        }
+        HpbarCo = StartCoroutine(SetHpbar(ratio));
     }
+
+    IEnumerator SetHpbar(float ratio)
+    {
+        while (back.fillAmount <= ratio)
+        {
+            back.fillAmount -= 0.1f * Time.deltaTime;
+            yield return null;
+        }
+        back.fillAmount = ratio;
+
+    }
+
+    private void ShowDamageText(float damage)//피해량 받아오기 필요
+    {
+        damageText.text = damage.ToString();
+        damageText.gameObject.SetActive(true);
+
+        StopCoroutine(damageTextCo);
+        damageTextCo = StartCoroutine(HideDamageText());
+    }
+
+    private IEnumerator HideDamageText()
+    {
+        yield return new WaitForSeconds(damageLifeTime);
+        damageText.gameObject.SetActive(false);
+    }
+
+
 
     public void IsDie()
     {
@@ -63,8 +104,8 @@ public class Enemy : MonoBehaviour
         isDying = true;
         animator.SetBool(HashDead, true);
         GameManager.Instance.playerGold.AddGold(rewardGold);
-        OnDied?.Invoke(this);
         gameObject.SetActive(false);
+        OnDied?.Invoke(this);
     }
     public void Init(float maxHP, double reward)
     {
@@ -74,10 +115,10 @@ public class Enemy : MonoBehaviour
         if (back) back.fillAmount = 1f;
     }
 
-    // ���߰�: HP��/�ִϸ�����/�÷��׸� ������ ������ �����·�
+
     private void ResetForSpawn()
     {
-        isDying = false;              // �� ������ �κ�: ���������� false�� �ʱ�ȭ
+        isDying = false; 
         animator.ResetTrigger(HashHit);
         animator.SetBool(HashDead,false);
     }
