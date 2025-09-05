@@ -13,6 +13,8 @@ public class WeaponManager : MonoBehaviour
     private GameObject currentWeapon;
     private GameObject currentMainWeapon;
 
+    public WeaponCollection weaponCollection;
+
     public static WeaponManager Instance;
 
     private void Awake()
