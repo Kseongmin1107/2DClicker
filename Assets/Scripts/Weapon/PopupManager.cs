@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class PopupManager : MonoBehaviour
 {
-    //[SerializeField] private GameObject inventoryPopup;
+    [SerializeField] private GameObject CollectionPopup;
     [SerializeField] private GameObject weaponEnhancePopup;
 
-    //public void OpenInventory()
-    //{
-    //    inventoryPopup.SetActive(true);
-    //}
+    public void OpenCollection()
+    {
+        CollectionPopup.SetActive(true);
+    }
 
-    //public void CloseInventory()
-    //{
-    //    inventoryPopup.SetActive(false);
-    //}
+    public void CloseCollection()
+    {
+        CollectionPopup.SetActive(false);
+    }
 
     public void OpenWeaponEnhance()
     {
