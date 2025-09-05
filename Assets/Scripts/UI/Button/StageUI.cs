@@ -26,7 +26,7 @@ public class StageUI : MonoBehaviour
         costBtn.onClick.AddListener(ClickAndGoNext);
         closePopupBtn.onClick.AddListener(PopupClose);
 
-
+        UpdatePrevButton();
         UpdateStageName();
     }
 
@@ -51,8 +51,14 @@ public class StageUI : MonoBehaviour
 
     void UpdateStageName()
     {
-        stageNameText.text = $"Stage {StageManager.Instance.currentStageIndex}";
+        stageNameText.text = $"Stage {stageManager.currentStageIndex}";
     }
+
+    void UpdatePrevButton()
+    {
+        prevStageBtn.gameObject.SetActive(stageManager.currentStageIndex > 1);
+    }
+
 
     void RefreshPopupUI()
     {
@@ -108,6 +114,7 @@ public class StageUI : MonoBehaviour
 
         stageManager.OpenOrGo(prev);
         UpdateStageName();
+        UpdatePrevButton();
     }
 
     void PopupClose()
@@ -118,8 +125,10 @@ public class StageUI : MonoBehaviour
     //stagepopup이 활성화된 상태에서 requireweapon이 충족됐다면 check 활성화, 충족되지 않으면 check 비활성화
     private void ClickAndGoNext()
     {
-        StageManager.Instance.OpenOrGo(StageManager.Instance.currentStageIndex + 1);
+        stageManager.OpenOrGo(stageManager.currentStageIndex + 1);
+        check.SetActive(false);
         PopupClose();
+        UpdatePrevButton();
         UpdateStageName();
     }
 
