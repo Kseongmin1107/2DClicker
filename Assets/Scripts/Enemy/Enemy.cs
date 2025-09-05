@@ -5,15 +5,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using Unity.Mathematics;
 
 public class Enemy : MonoBehaviour
 {
     //public RectTransform front;
     [SerializeField] private Image back;
+    [SerializeField] private TextMeshProUGUI damageText;
 
 
     private Coroutine HpbarCo;
-
+    private Coroutine DamageTxt;
+    private float TxtShowT = 0.6f;
 
     public float Fullhealth = 100.0f;
     public float Nowhealth = 100.0f;
@@ -65,6 +68,13 @@ public class Enemy : MonoBehaviour
             StopCoroutine(HpbarCo);
         }
         HpbarCo = StartCoroutine(SetHpbar(ratio));
+
+        if (DamageTxt != null)
+        {
+            StopCoroutine(DamageTxt);
+
+        }
+        DamageTxt = StartCoroutine(ShowDamage(damage));
     }
 
     IEnumerator SetHpbar(float ratio)
@@ -77,6 +87,25 @@ public class Enemy : MonoBehaviour
         back.fillAmount = ratio;
 
     }
+
+    IEnumerator ShowDamage(float damage)
+    {
+        damageText.text = damage.ToString();
+        Color DamageColor = damageText.color;
+
+        damageText.color = new Color(DamageColor.r, DamageColor.g, DamageColor.b,1f);
+
+        float StartTime = 0f;
+        while (StartTime < TxtShowT)
+        {
+            StartTime += Time.deltaTime;
+            float a = Mathf.Clamp01(1 - (StartTime * (1 / 0.6f)));
+            damageText.color = new Color(DamageColor.r, DamageColor.g, DamageColor.b, a);
+
+            yield return null;
+        }
+    }
+
 
 
 
