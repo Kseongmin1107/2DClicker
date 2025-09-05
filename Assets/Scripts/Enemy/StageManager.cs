@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
+    public static StageManager Instance { get; private set; }
+
     public List<StageData> stages;
 
     public int currentStageIndex = 1;
@@ -35,7 +37,7 @@ public class StageManager : MonoBehaviour
 
     public void OpenOrGo(int index)
     {
-        index = Mathf.Clamp(currentStageIndex, 1, 30);
+        index = Mathf.Clamp(index, 1, 30);
         if (IsUnlocked(index))
         {
             GoToStage(index);
@@ -117,10 +119,10 @@ public class StageManager : MonoBehaviour
         {
             fieldBackGround.sprite = data.map;
         }
-        //if (data.bgm)
-        //{
-        //    AudioManager.Instance.FadeTo(data.bgm, 1.0f);
-        //}
+        if (data.bgm)
+        {
+            AudioManager.Instance.FadeTo(data.bgm, 1.0f);
+        }
     }
     public void SpawnEnemy(StageData data)
     {

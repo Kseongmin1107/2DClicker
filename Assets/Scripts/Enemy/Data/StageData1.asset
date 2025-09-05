@@ -19,4 +19,4 @@ MonoBehaviour:
   enemyMaxHP: 27
   openCondition:
     requiredWeaponIndex: 6
-    goldCost: 0
+    goldCost: 400
