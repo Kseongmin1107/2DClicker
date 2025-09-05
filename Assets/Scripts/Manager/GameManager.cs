@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         Load();
 
@@ -51,7 +50,6 @@ public class GameManager : MonoBehaviour
         }
         playergold.OnGoldChanged += v => playerData.gold = v;
     }
-
 
     // Save and Load
     public void Save()
