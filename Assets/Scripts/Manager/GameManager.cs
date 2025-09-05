@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         //�׽�Ʈ���� 1000����
         if (playergold.Gold == -1)
         {
-            playerGold.SetGold(1000);
+            playerGold.SetGold(13000);
         }
 
         else

@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StageData", menuName = "Game/Stage Data")]
 public class StageData : ScriptableObject
 {
+    public int stageNumber;
+
     [Header("Environment")]
     public Sprite map;
     public AudioClip bgm;

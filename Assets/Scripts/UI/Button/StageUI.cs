@@ -18,6 +18,7 @@ public class StageUI : MonoBehaviour
     [SerializeField] private GameObject nextStagePopup;
 
 
+
     private void Awake()
     {
         //버튼 연결
@@ -27,8 +28,10 @@ public class StageUI : MonoBehaviour
         closePopupBtn.onClick.AddListener(PopupClose);
 
         UpdatePrevButton();
+        RefreshPopupUI();
         UpdateStageName();
     }
+
 
     private void OnEnable()
     {
@@ -60,20 +63,19 @@ public class StageUI : MonoBehaviour
     }
 
 
-    void RefreshPopupUI()
+    public void RefreshPopupUI()
     {
-        var data = stageManager.stages[stageManager.currentStageIndex];
-        var cond = data.openCondition;
+        var cond = stageManager.stages[stageManager.currentStageIndex-1].openCondition;
 
 
         //비용,골드 stagedata를 30개 만들어놓았든데 그 중 OpenCondition 안에 goldCost에 값을 저장해두었어 그걸 가져올거야.
         double cost = cond.goldCost;
         double have = GameManager.Instance.playerGold.Gold;
-        costText.text = cost.ToString("#,0");
+        costText.text = $"{cost}";
         costText.color = have < cost ? Color.red : Color.black;
 
         //무기는 현재 장착한 무기와 OpenCondition 안에requiredWeaponIndex값이 같은지 확인할거야.
-        if(cond.requiredWeaponIndex == GameManager.Instance.Player.equippedWeaponLevel) 
+        if(stageManager.IsRequireWeapon(cond)) 
         {
             check.SetActive(true);
         }
@@ -90,8 +92,9 @@ public class StageUI : MonoBehaviour
         bool unlocked = IsUnlocked(next);
         if (unlocked)
         {
-            StageManager.Instance.OpenOrGo(next);
+            stageManager.OpenOrGo(next);
             UpdateStageName();
+            RefreshPopupUI();
         }
         else
         {
@@ -125,16 +128,17 @@ public class StageUI : MonoBehaviour
     //stagepopup이 활성화된 상태에서 requireweapon이 충족됐다면 check 활성화, 충족되지 않으면 check 비활성화
     private void ClickAndGoNext()
     {
-        stageManager.OpenOrGo(stageManager.currentStageIndex + 1);
-        check.SetActive(false);
-        PopupClose();
-        UpdatePrevButton();
-        UpdateStageName();
+        var cond = stageManager.stages[stageManager.currentStageIndex - 1].openCondition;
+        double cost = cond.goldCost;
+        double have = GameManager.Instance.playerGold.Gold;
+        if (stageManager.IsRequireWeapon(cond) && have>= cost)
+        {
+            stageManager.OpenOrGo(stageManager.currentStageIndex+1);
+            check.SetActive(false);
+            PopupClose();
+            UpdatePrevButton();
+            UpdateStageName();
+        }
     }
 
-    //stagepopup이 활성화된 상태에서 
-    //1. (requireweapon이 충족 && player.gold > costgold)면 버튼 활성화
-    //2. player.gold < costgold면 costText 글씨 색상 빨간색
-    //3. player.gold > costgold 이지만 requireweapon이 충족되지 않는다면 버튼 눌러도 반응없음
-    //1번 상태에서 버튼을 누르면 gotostage로 현재스테이지 + 1 스테이지 오픈 및 이동
 }
