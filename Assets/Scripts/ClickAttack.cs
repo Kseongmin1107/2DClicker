@@ -11,7 +11,7 @@ public class ClickAttack : MonoBehaviour
     [SerializeField] private AudioClip attackSound;
     private AudioSource audioSource;
 
-    private PlayerControls playerControls;
+    private  PlayerControls playerControls;
 
     private void Awake()
     {
@@ -71,7 +71,7 @@ public class ClickAttack : MonoBehaviour
             audioSource.PlayOneShot(attackSound);
         }
 
-        Debug.Log("°ø°İ ¿Ï·á! " + (isAutoAttack ? "ÀÚµ¿ °ø°İ" : "Å¬¸¯ °ø°İ"));
+        Debug.Log("ê³µê²© ì™„ë£Œ! " + (isAutoAttack ? "ìë™ ê³µê²©" : "í´ë¦­ ê³µê²©"));
     }
 
     private float CalculateDamage()
@@ -92,11 +92,11 @@ public class ClickAttack : MonoBehaviour
         if (isCritical)
         {
             damage *= GameManager.Instance.baseCritDamage;
-            Debug.Log("Ä¡¸íÅ¸ ¹ß»ı! µ¥¹ÌÁö: " + damage);
+            Debug.Log("ì¹˜ëª…íƒ€ ë°œìƒ! ë°ë¯¸ì§€: " + damage);
         }
         else
         {
-            Debug.Log("ÀÏ¹İ °ø°İ. µ¥¹ÌÁö: " + damage);
+            Debug.Log("ì¼ë°˜ ê³µê²©. ë°ë¯¸ì§€: " + damage);
         }
 
         return damage;
@@ -111,7 +111,7 @@ public class ClickAttack : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Attack Effect°¡ ÇÒ´çµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogWarning("Attack Effectê°€ í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
         }
     }
 }
