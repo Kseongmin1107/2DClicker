@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Weapon : MonoBehaviour
 {
     public WeaponStats statData;
+    public StageUI stageUI;
 
     [SerializeField] private Text weaponNameText;
     [SerializeField] private Text weaponMainNameText;
@@ -47,6 +48,7 @@ public class Weapon : MonoBehaviour
         level++;
         GameManager.Instance.Player.equippedWeaponLevel = level;
         UpdateEnhanceUI();
+        stageUI.RefreshPopupUI();
 
         if (weaponCollection != null)
         {

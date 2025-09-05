@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587983c469d224bdd8c4e066c3a4d069, type: 3}
   m_Name: StageData4
   m_EditorClassIdentifier: 
+  stageNumber: 4
   map: {fileID: 117730692, guid: 367fef7c7a0cf8b4e8fc2020259965e9, type: 3}
   bgm: {fileID: 8300000, guid: eb7f10105313640a18ce7926041a4d76, type: 3}
   enemyPrefab: {fileID: 3114047050648796485, guid: 7330515ccc3aad9419e2a7508a444255, type: 3}
   goldPerEnemy: 40
   enemyMaxHP: 231
   openCondition:
-    requiredWeaponIndex: 24
+    requiredWeaponIndex: 23
     goldCost: 2040

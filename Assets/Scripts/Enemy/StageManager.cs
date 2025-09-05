@@ -73,25 +73,20 @@ public class StageManager : MonoBehaviour
 
     private bool TryOpenStage(int index)
     {
-        var data = stages[index-1];
+        var data = stages[index-2];
         var cond = data.openCondition;
 
         if (IsRequireWeapon(cond))
         {
-            //need +6enhance requireweapon popup
+            if (GameManager.Instance.TrySpendGold(cond.goldCost))
+            {
+                Unlock(index);
+                return true;
+            }
             return false;
         }
 
-        if (cond.goldCost > 0)
-        {
-            if (!GameManager.Instance.TrySpendGold(cond.goldCost))
-            {
-                return false;
-            }
-        }
-
-        Unlock(index);
-        return true;
+        return false;
     }
 
     private void Unlock(int index)
@@ -102,15 +97,14 @@ public class StageManager : MonoBehaviour
 
     }
 
-    private bool IsRequireWeapon(StageData.OpenCondition cond)
+    public bool IsRequireWeapon(StageData.OpenCondition cond)
     {
-        var w = WeaponManager.Instance.GetCurrentWeapon();
-        if (cond.requiredWeaponIndex >= 0 && GameManager.Instance.Player.equippedWeaponLevel != cond.requiredWeaponIndex)
+        if (GameManager.Instance.Player.equippedWeaponLevel >= cond.requiredWeaponIndex)
         {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     private void ApplyMapAndBgm(StageData data)
