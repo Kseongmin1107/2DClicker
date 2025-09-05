@@ -87,7 +87,6 @@ public class Enemy : MonoBehaviour
         back.fillAmount = ratio;
 
     }
-
     IEnumerator ShowDamage(float damage)
     {
         damageText.text = damage.ToString();
@@ -105,10 +104,6 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
     }
-
-
-
-
     public void IsDie()
     {
         if (isDying)return;
