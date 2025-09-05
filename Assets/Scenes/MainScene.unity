@@ -1481,8 +1481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 30
-  image: {fileID: 273695906}
 --- !u!114 &273695906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3067,7 +3065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4250298743439401463, guid: 184c47b8b8e4c814d8241a901f177515, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4250298743439401463, guid: 184c47b8b8e4c814d8241a901f177515, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5773,8 +5771,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
-  image: {fileID: 1247504370}
 --- !u!114 &1247504370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7662,8 +7658,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: UI/RoundedCorners/RoundedCorners
-  m_Shader: {fileID: 4800000, guid: 0bd2ec5d73751e34a814274a454bec41, type: 3}
-  m_Parent: {fileID: 0}
+  m_Shader: {fileID: 10721, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 2100000, guid: 7035cb338e64d0c49bceedc6e31acbc5, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -7682,17 +7678,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _ColorMask: 15
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UseUIAlphaClip: 0
-    m_Colors:
-    - _OuterUV: {r: 0, g: 0, b: 1, a: 1}
-    - _WidthHeightRadius: {r: 607.5674, g: 511.63574, b: 80, a: 0}
+    m_Floats: []
+    m_Colors: []
   m_BuildTextureStacks: []
 --- !u!1 &1841160337
 GameObject:
@@ -9220,8 +9207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 15
-  image: {fileID: 2122365690}
 --- !u!114 &2122365689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10986,8 +10971,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 40
-  image: {fileID: 6949419030070465559}
 --- !u!114 &3759800616917186958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11092,8 +11075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
-  image: {fileID: 4462969764401208813}
 --- !u!114 &3915236917240577792
 MonoBehaviour:
   m_ObjectHideFlags: 0
