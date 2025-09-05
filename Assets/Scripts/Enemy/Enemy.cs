@@ -11,11 +11,9 @@ public class Enemy : MonoBehaviour
     //public RectTransform front;
     [SerializeField] private Image back;
 
-    [SerializeField] private TextMeshProUGUI damageText;
-    private float damageLifeTime = 0.5f;
 
     private Coroutine HpbarCo;
-    private Coroutine damageTextCo;
+
 
     public float Fullhealth = 100.0f;
     public float Nowhealth = 100.0f;
@@ -51,7 +49,6 @@ public class Enemy : MonoBehaviour
         if (isDying) return;
 
         Nowhealth = Nowhealth - damage;
-        ShowDamageText(damage);
 
         if (Nowhealth > 0)
         {
@@ -79,21 +76,6 @@ public class Enemy : MonoBehaviour
         }
         back.fillAmount = ratio;
 
-    }
-
-    private void ShowDamageText(float damage)//피해량 받아오기 필요
-    {
-        damageText.text = damage.ToString();
-        damageText.gameObject.SetActive(true);
-
-        StopCoroutine(damageTextCo);
-        damageTextCo = StartCoroutine(HideDamageText());
-    }
-
-    private IEnumerator HideDamageText()
-    {
-        yield return new WaitForSeconds(damageLifeTime);
-        damageText.gameObject.SetActive(false);
     }
 
 
