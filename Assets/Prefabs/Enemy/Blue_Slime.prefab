@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   back: {fileID: 1262611095350771221}
-  damageText: {fileID: 1417651205129002003}
   Fullhealth: 100
   Nowhealth: 100
   score: 3

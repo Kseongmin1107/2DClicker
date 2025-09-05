@@ -69,9 +69,9 @@ public class Enemy : MonoBehaviour
 
     IEnumerator SetHpbar(float ratio)
     {
-        while (back.fillAmount <= ratio)
+        while (back.fillAmount >= ratio)
         {
-            back.fillAmount -= 0.1f * Time.deltaTime;
+            back.fillAmount -= 0.5f * Time.deltaTime;
             yield return null;
         }
         back.fillAmount = ratio;
