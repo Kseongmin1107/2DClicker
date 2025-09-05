@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerGold
 {
-    private double gold = -1;
+    private double gold;
 
     public event Action<double> OnGoldChanged;
     public double Gold => gold;

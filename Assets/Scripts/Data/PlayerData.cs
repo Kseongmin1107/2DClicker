@@ -23,5 +23,4 @@ public class PlayerData
 
     public List<int> unlockStages = new List<int> { 1 };
     public int lastvisitedStage = 1;
-    public int highestUnlockedStage = 1;
 }

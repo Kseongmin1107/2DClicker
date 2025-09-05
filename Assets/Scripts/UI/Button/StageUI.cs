@@ -54,7 +54,7 @@ public class StageUI : MonoBehaviour
 
     void UpdateStageName()
     {
-        stageNameText.text = $"Stage {stageManager.currentStageIndex}";
+        stageNameText.text = $"Stage {GameManager.Instance.Player.currentStage}";
     }
 
     void UpdatePrevButton()

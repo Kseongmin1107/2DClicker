@@ -81,6 +81,7 @@ public class StageManager : MonoBehaviour
             if (GameManager.Instance.TrySpendGold(cond.goldCost))
             {
                 Unlock(index);
+                GameManager.Instance.Player.currentStage = index;
                 return true;
             }
             return false;
