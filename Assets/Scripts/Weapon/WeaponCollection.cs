@@ -8,6 +8,7 @@ public class WeaponCollection : MonoBehaviour
 {
     [SerializeField] private Image[] slotHideImage;
     [SerializeField] private Sprite[] weaponSprite;
+    [SerializeField] private Text[] slotNameText;
 
     public Weapon weapon;
 
@@ -29,6 +30,9 @@ public class WeaponCollection : MonoBehaviour
             {
                 slotHideImage[i].sprite = weaponSprite[i];
                 slotHideImage[i].gameObject.SetActive(true);
+
+                if (slotNameText != null && i < slotNameText.Length)
+                    slotNameText[i].text = weapon.statData.GetWeaponName(i * 6);
             }
         }
     }
