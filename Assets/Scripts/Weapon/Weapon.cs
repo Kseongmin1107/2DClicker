@@ -48,6 +48,13 @@ public class Weapon : MonoBehaviour
         GameManager.Instance.Player.equippedWeaponLevel = level;
         UpdateEnhanceUI();
 
+        if (weaponCollection != null)
+        {
+            weaponCollection.UpdateCollection(this);
+            Debug.Log("도감업데이트");
+        }
+
+
         GameManager.Instance.Save();
     }
 
