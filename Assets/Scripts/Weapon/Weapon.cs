@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Weapon : MonoBehaviour
 {
     public WeaponStats statData;
-    //[SerializeField] private int gold = 1000;
 
     [SerializeField] private Text weaponNameText;
     [SerializeField] private Text weaponMainNameText;
@@ -29,7 +28,8 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        
+        //level = 0;
+        //GameManager.Instance.Player.equippedWeaponLevel = 0;        // 테스트코드
         level = GameManager.Instance.Player.equippedWeaponLevel;
        
         UpdateEnhanceUI();
@@ -41,25 +41,21 @@ public class Weapon : MonoBehaviour
 
         if (GameManager.Instance.playerGold == null || !GameManager.Instance.playerGold.TrySpendGold(cost))
         {
-            Debug.Log("강화 성공");
             return;
         }
 
         level++;
         GameManager.Instance.Player.equippedWeaponLevel = level;
         UpdateEnhanceUI();
-        GameManager.Instance.Save();
 
-        Debug.Log($"+{level}");
-        Debug.Log($"공격력 :{currentAttack}, 치명타 확률 :{currentCritical}");
-        Debug.Log($"강화 비용 : {cost}");
+        GameManager.Instance.Save();
     }
 
     private int GetEnhanceCost(int nextLevel)
     {
         if (statData == null) return 0;
 
-        int weaponIndex = level / 6;
+        int weaponIndex = level / 6 + 1;
         int baseGold = statData.GetBaseGold(weaponIndex);
 
         return (baseGold / 20) * 15 * nextLevel;     // 베이스골드 / 20 * 15
@@ -129,12 +125,6 @@ public class Weapon : MonoBehaviour
             criticalText.text = "치명타확률 : " + currentCritical.ToString("F2");
 
         UpdateEnhanceCost();
-
-        if (weaponCollection != null)
-        {
-            weaponCollection.UpdateCollection(spriteIndex);
-        }
-
     }
 
     public float GetCriticalRate()

@@ -1,29 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponCollection : MonoBehaviour
 {
-    [SerializeField] private Image[] slotImage;
-    [SerializeField] private GameObject[] slotHide;
+    [SerializeField] private Image[] slotHideImage;
     [SerializeField] private Sprite[] weaponSprite;
 
     public Weapon weapon;
 
-    public void UpdateCollection(int spriteIndex)      // 도감업데이트
+    private void Start()
     {
-        for (int i = 0; i < slotHide.Length; i++)
+        UpdateCollection(); // 게임 시작 시 도감 업데이트
+    }
+
+    public void UpdateCollection()            // 무기 해금될 때 호출
+    {
+        if (weapon == null || slotHideImage == null || weaponSprite == null)
+            return;
+
+        int unlockedCount = (weapon.level / 6) + 1;
+
+        for (int i = 0; i < slotHideImage.Length; i++)
         {
-            if (i <= spriteIndex)
+            if (i < unlockedCount && i < weaponSprite.Length)
             {
-                slotHide[i].SetActive(false);        // 가림막 제거
-                slotImage[i].sprite = weaponSprite[i]; // 이미지 표시
-            }
-            else
-            {
-                slotHide[i].SetActive(true);
+                slotHideImage[i].sprite = weaponSprite[i];
+                slotHideImage[i].gameObject.SetActive(true);
             }
         }
+    }
+
+    public void UnlockedCollection()
+    {
+        UpdateCollection();
     }
 }
