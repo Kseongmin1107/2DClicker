@@ -75,8 +75,30 @@
 
 -----
 **황상욱**
-<img width="990" height="818" alt="image (2)" src="https://github.com/user-attachments/assets/818d9c3f-84a3-4b4a-8861-eea99d6d5569" />
+
+<img width="644" height="319" alt="image (2)" src="https://github.com/user-attachments/assets/818d9c3f-84a3-4b4a-8861-eea99d6d5569" />
+
 체력바와 데미지를 코루틴을 통해서 구현한 것이 마음에 들었습니다. 코루틴 사용법에 감을 잡을 수 있었습니다.
+
+-----
+**심재환**
+    
+스테이지 관련 ui와 게임 설정에 대한 ui를 제작하는과정에서
+addlistner를 통해 함수설계와 코드 내에서 바로 버튼을 연결하였습니다. 특히 버튼을 많이 사용하는 스테이지 관련 ui작업했을 때 효율적이었습니다.
+    
+<img width="644" height="319" alt="image (4)" src="https://github.com/user-attachments/assets/47e186b1-6ea9-4deb-b50a-7d08a33984a7" />
+
+    
+클래스를 활용해서 값을 저장하는 방식을 처음 해보았습니다. 데이터 저장에도 좋았고 이후 
+    
+<img width="644" height="319" alt="image (5)" src="https://github.com/user-attachments/assets/f6e9b5bf-a3da-4806-9d71-d130eaeb2ad9" />
+
+    
+스테이지를 만드는 과정에서 여러 조건을 사용해야했습니다. 그때 저장 및 클래스로써 데이터를 모아두었기에 여러 조건이 맞아야 활성화되는 로직을 편리하게 만들어갈 수 있었습니다.
+
+<img width="644" height="319" alt="image (6)" src="https://github.com/user-attachments/assets/3c774248-0847-4c75-88fe-7b44b8d55a76" />
+
+
 ## ⚠️ 트러블 슈팅
 **김성민**
 
@@ -184,6 +206,18 @@
 무기 도감 부분에서 웨폰의 정보들을 가져와서 웨폰이 해금될때마다 도감 갱신되게 하려고 했는데 잘 안됐다. t:weapon으로 웨폰의 현 상황 확인을 해보니 메인으로 만들어둔 웨폰이 아닌 슬롯에 복사한 웨폰들이 강화할때마다 업데이트 되고있었다.
 
 그래서 복사한 웨폰들의 정보를 웨폰콜렉션에서 가져와서 도감에 적용했더니 해결되었다.
+-----
+**심재환**
+게임매니저, ui매니저, 스테이지 매니저 등 매니저를 많이 사용하게 됐는데 만들때마다 instance, static 작업을 하게 됐다. 제너릭을 다음번에는 적극활용해볼 예정이다.
+
+스크립터블 오브젝트
+
+방치형 장르로 만들면서 무기 종류도 다양했고 그에 따라 스테이지 종류도 다양해졌다.
+
+처음 스크립터블 오브젝트를 사용해서 공부하는 느낌도 들었다.
+
+하지만 데이터가 방대해졌을 때 휴먼이슈가 자주 발생했다.
+<img width="2880" height="1800" alt="image (3)" src="https://github.com/user-attachments/assets/6918d370-9609-4c1c-80d7-c73ac3556176" />
 
 ---------
 **황상욱**
