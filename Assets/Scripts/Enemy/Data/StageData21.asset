@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587983c469d224bdd8c4e066c3a4d069, type: 3}
+  m_Name: StageData21
+  m_EditorClassIdentifier: 
+  stageNumber: 21
+  map: {fileID: 117730692, guid: 367fef7c7a0cf8b4e8fc2020259965e9, type: 3}
+  bgm: {fileID: 8300000, guid: 9a1e1e160e7b2e84c9be4b78f60270fb, type: 3}
+  enemyPrefab: {fileID: 5520082854527905039, guid: 58f9c9da0a7cc0f4ea33179e5103dbff, type: 3}
+  goldPerEnemy: 1200
+  enemyMaxHP: 2639
+  openCondition:
+    requiredWeaponIndex: 125
+    goldCost: 200400
