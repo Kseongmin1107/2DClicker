@@ -39,15 +39,15 @@ public class GameManager : MonoBehaviour
         Load();
 
         //Gold Test
-        //if (playergold.Gold == 0)
-        //{
-        //    playerGold.SetGold(13000);
-        //}
+        if (playergold.Gold == 0)
+        {
+            playerGold.SetGold(13000000000);
+        }
 
-        //else
-        //{
-        //    playergold.SetGold(playerData.gold);
-        //}
+        else
+        {
+            playergold.SetGold(playerData.gold);
+        }
         playergold.OnGoldChanged += v => playerData.gold = v;
     }
 
