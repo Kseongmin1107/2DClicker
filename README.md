@@ -35,8 +35,7 @@
 
 ## 🎬 시연 영상
 
-    
-
+[BeatSlime 시연 영상](https://www.youtube.com/shorts/lVL-lKWQOh8)
 ----------
 
 ## 💻 기술 스택
